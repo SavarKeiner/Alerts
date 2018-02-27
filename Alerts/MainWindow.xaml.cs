@@ -24,6 +24,11 @@ namespace Alerts
         public MainWindow()
         {
             InitializeComponent();
+
+            sideBar.Visibility = Visibility.Collapsed;
+            sideBar.gridExchange.Visibility = Visibility.Collapsed;
+            sideBar.gridPairing.Visibility = Visibility.Collapsed;
+            sideBar.gridCoin.Visibility = Visibility.Collapsed;
         }
 
         public void addCellCoin()
@@ -61,6 +66,7 @@ namespace Alerts
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            scrollViewer.Width = e.NewSize.Width;
             reSize();
         }
     }

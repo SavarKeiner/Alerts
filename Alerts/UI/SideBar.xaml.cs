@@ -37,7 +37,45 @@ namespace Alerts.UI
             l.Add(imageTextItem1);
             listExchange.ItemsSource = l;
 
-            this.IsVisibleChanged += (o, e) => {
+            gridExchange.IsVisibleChanged += (o, e) =>
+            {
+                if((bool)e.NewValue == true)
+                {
+                    parentGrid.Width = 150;
+                }
+                else
+                {
+                    listExchange.UnselectAll();
+                    parentGrid.Width = 0;
+                }
+            };
+
+            gridPairing.IsVisibleChanged += (o, e) =>
+            {
+                if ((bool)e.NewValue == true)
+                {
+                    parentGrid.Width = 300;
+                }
+                else
+                {
+                    listPairing.UnselectAll();
+                    parentGrid.Width = 150;
+                }
+            };
+
+            gridCoin.IsVisibleChanged += (o, e) =>
+            {
+                if ((bool)e.NewValue == true)
+                {
+                    parentGrid.Width = 450;
+                }
+                else
+                {
+                    listCoins.UnselectAll();
+                    parentGrid.Width = 300;
+                }
+            };
+            /*this.IsVisibleChanged += (o, e) => {
                 bool isV = (bool)e.NewValue;
 
                 if (isV == true)
@@ -53,7 +91,7 @@ namespace Alerts.UI
                     selectedExchange = Exchanges.INIT;
                     selectedCoin = Coins.INTI;
                 }
-            };
+            };*/
         }
 
         private void listExchange_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -67,7 +105,9 @@ namespace Alerts.UI
                     setBinanceCoins();
                 }
 
-                parentGrid.Width = 300;
+
+                gridPairing.Visibility = Visibility.Visible;
+                gridCoin.Visibility = Visibility.Visible;
             }
         }
 
@@ -94,7 +134,6 @@ namespace Alerts.UI
                     cellCoin.cellGrid.addIndicator(dialog.KlinesWidth, dialog.Indicator, dialog.Condition, dialog.ConditionValue);
 
                     mainWindow.listCellCoin.Children.Add(cellCoin);
-                    this.Visibility = Visibility.Collapsed;
                 }
             }
         }
@@ -109,11 +148,6 @@ namespace Alerts.UI
 
             list.Add(imageTextItem1);
             listCoins.ItemsSource = list;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("CLICK");
         }
     }
 }

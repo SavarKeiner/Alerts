@@ -6,20 +6,38 @@
              xmlns:local="clr-namespace:Alerts.UI"
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Width="100" Background="Black">
+             d:DesignHeight="300" d:DesignWidth="300" Width="100" Background="#2b5797">
     <StackPanel>
-        <Button HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" BorderThickness="0">
+        <Button HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="addCoinClick">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <ContentPresenter Content="{TemplateBinding Content}"/>
                 </ControlTemplate>
             </Button.Template>
-            <StackPanel Width="80" Height="80" Margin="10">
-                <svgc:SvgViewbox Source="/UI/icons/ButtonIcons/ic_add_circle_outline_white_24px.svg" Width="40" Height="50"></svgc:SvgViewbox>
-                <Label Content="Norification" Foreground="White" FontFamily="Courier" FontWeight="SemiBold" HorizontalAlignment="Center" ></Label>
-            </StackPanel>
+            <Grid Width="80" Height="80" Margin="10,10,10,5" Background="#2b5797">
+                <Border BorderThickness="1" BorderBrush="White" Visibility="Hidden">
+                </Border>
+                <StackPanel>
+                    <svgc:SvgViewbox Source="/UI/icons/ButtonIcons/ic_add_circle_outline_white_24px.svg" Width="40" Height="40" Margin="0,12,0,0"></svgc:SvgViewbox>
+                    <Label Content="Add Coin" Foreground="White" FontFamily="Courier" FontWeight="SemiBold" HorizontalAlignment="Center" ></Label>
+                </StackPanel>
+            </Grid>
         </Button>
 
-
+        <Button HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <ContentPresenter Content="{TemplateBinding Content}"/>
+                </ControlTemplate>
+            </Button.Template>
+            <Grid Width="80" Height="80" Margin="10,5,10,10" Background="#2b5797">
+                <Border BorderThickness="1" BorderBrush="White" Visibility="Hidden">
+                </Border>
+                <StackPanel>
+                    <svgc:SvgViewbox Source="/UI/icons/ButtonIcons/ic_notifications_white_24px.svg" Width="35" Height="35" Margin="0,12,0,0"></svgc:SvgViewbox>
+                    <Label Content="Notification" Foreground="White" FontFamily="Courier" FontWeight="SemiBold" HorizontalAlignment="Center" ></Label>
+                </StackPanel>
+            </Grid>
+        </Button>
     </StackPanel>
 </UserControl>

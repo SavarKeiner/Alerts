@@ -160,9 +160,6 @@
     <Compile Include="UI\ImageTextItem.xaml.cs">
       <DependentUpon>ImageTextItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\MenuBar.xaml.cs">
-      <DependentUpon>MenuBar.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\SideBar.xaml.cs">
       <DependentUpon>SideBar.xaml</DependentUpon>
     </Compile>
@@ -218,10 +215,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ImageTextItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\MenuBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -298,6 +291,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Icons\ButtonIcons\ic_add_circle_outline_white_24px.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\ButtonIcons\ic_notifications_white_24px.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

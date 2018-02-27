@@ -6,43 +6,63 @@
              xmlns:local="clr-namespace:Alerts.UI"
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel Orientation="Horizontal" x:Name="parentGrid" Width="300">
-        <Grid x:Name="gridExchange" Grid.Column="0" Width="150">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
+             d:DesignHeight="300" d:DesignWidth="450" Background="Green">
+    <Grid x:Name="parentGrid" Width="450">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-            <Border BorderBrush="#007ED8" BorderThickness="0,0,0,2">
-                <Button Grid.Row="0" Grid.Column="0" Click="Button_Click" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" BorderThickness="0">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <ContentPresenter Content="{TemplateBinding Content}"/>
-                        </ControlTemplate>
-                    </Button.Template>
+        <Grid x:Name="gridExchange" Grid.Row="0" Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
 
-                    <Label Content="Select Exchange" Background="#1B1B1B" Foreground="White" FontSize="16" FontFamily="Courier" FontWeight="SemiBold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Label>
-                </Button>
-            </Border>
-            
+                <Border Grid.Row="0" BorderThickness="0,0,1,1" BorderBrush="White">
+                    <Label Content="Exchange" Height="40" VerticalContentAlignment="Center" Foreground="White" Background="#3063ad" FontFamily="Courier" FontWeight="Bold" FontSize="18"></Label>
+                </Border>
 
-            <ListBox Grid.Row="1" Grid.Column="0" x:Name="listExchange" Background="Gray" SelectionChanged="listExchange_SelectionChanged"></ListBox>
-            
+                <ListBox Grid.Row="1" x:Name="listExchange" Background="#3063ad" BorderThickness="0,0,1,0" BorderBrush="White" SelectionChanged="listExchange_SelectionChanged">
+
+                </ListBox>
+            </Grid>
         </Grid>
 
-        <Grid x:Name="gridCoin" Visibility="Visible" Grid.Column="1" Width="150">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
+        <Grid x:Name="gridPairing" Grid.Row="0" Grid.Column="1" Visibility="Visible">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
 
-            <Border BorderBrush="#007ED8" BorderThickness="0,0,0,2">
-                <Label Grid.Row="0" Grid.Column="0" Content="Select Coin" Background="#1B1B1B" Foreground="White" FontSize="16" FontFamily="Courier" FontWeight="SemiBold"></Label>
-            </Border>
-            <ListBox Grid.Row="1" Grid.Column="0" x:Name="listCoins" SelectionChanged="listCoins_SelectionChanged" Background="Gray"></ListBox>
+                <Border Grid.Row="0" BorderThickness="0,0,1,1" BorderBrush="White">
+                    <Label Content="Pairing" Height="40" VerticalContentAlignment="Center" Foreground="White" Background="#3063ad" FontFamily="Courier" FontWeight="Bold" FontSize="18"></Label>
+                </Border>
 
+                <ListBox Grid.Row="1" x:Name="listPairing" Background="#3063ad" BorderThickness="0,0,1,0" BorderBrush="White">
+
+                </ListBox>
+            </Grid>
         </Grid>
 
-    </StackPanel>
+        <Grid x:Name="gridCoin" Grid.Row="0" Grid.Column="2" Visibility="Visible">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="White">
+                    <Label Content="Coin" Height="40" VerticalContentAlignment="Center" Foreground="White" Background="#3063ad" FontFamily="Courier" FontWeight="Bold" FontSize="18"></Label>
+                </Border>
+
+                <ListBox Grid.Row="1" x:Name="listCoins" Background="#3063ad" BorderThickness="0,0,0,0" SelectionChanged="listCoins_SelectionChanged">
+                    
+                </ListBox>
+            </Grid>
+        </Grid>
+    </Grid>
 </UserControl>

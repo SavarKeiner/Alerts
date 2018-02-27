@@ -6,17 +6,17 @@
         xmlns:local="clr-namespace:Alerts"
         xmlns:control = "clr-namespace:Alerts.UI" 
         mc:Ignorable="d"
-        Title="MainWindow" Width="1280" Height="720" SizeChanged="Window_SizeChanged">
-    <DockPanel>
-        <control:MenuBar x:Name="menuBar" DockPanel.Dock="Top"></control:MenuBar>
-        <control:SideMenu x:Name="sideBar" DockPanel.Dock="Left"></control:SideMenu>
+        Title="MainWindow" Width="1280" Height="720" SizeChanged="Window_SizeChanged" x:Name="mW" Background="Yellow">
+    <Canvas>
 
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
-                    <StackPanel x:Name="listCellCoin">
+        <ScrollViewer x:Name="scrollViewer" Canvas.Top="0" Canvas.Left="{Binding ActualWidth, ElementName=sideBar}" Height="{Binding ActualHeight, ElementName=mW}" Width="1180" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="listCellCoin">
 
-        </StackPanel>
+            </StackPanel>
         </ScrollViewer>
 
 
-    </DockPanel>
+        <control:SideBar x:Name="sideBar" Canvas.Left="100" Canvas.Top="0" Height="{Binding ActualHeight, ElementName=mW}"></control:SideBar>
+        <control:SideMenu x:Name="sideMenu" Canvas.Top="0" Canvas.Left="0" Height="{Binding ActualHeight, ElementName=mW}"></control:SideMenu>
+    </Canvas>
 </Window>
