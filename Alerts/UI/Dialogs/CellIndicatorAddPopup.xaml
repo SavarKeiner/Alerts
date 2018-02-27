@@ -1,0 +1,19 @@
+﻿<Window x:Class="Alerts.UI.Dialogs.CellIndicatorAddPopup"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Alerts.UI.Dialogs"
+        mc:Ignorable="d"
+        Title="CellIndicatorAddPopup" Height="140" Width="300" Loaded="Window_Loaded">
+    <StackPanel>
+        <WrapPanel HorizontalAlignment="Center">
+            <ComboBox x:Name="conditionSelect" Margin="10,10,10,0" Width="150" Height="20" Loaded="loadConditions" SelectionChanged="conditionSelect_SelectionChanged"></ComboBox>
+            <xctk:DoubleUpDown FormatString=".0#######" x:Name="textValue" Width="75" Height="20" Margin="0,10,10,0" ValueChanged="textValue_ValueChanged"/>
+        </WrapPanel>
+        <ComboBox x:Name="klineChagneSelect" Margin="10,10,10,0" Width="150" Height="20" Loaded="loadConditions" SelectionChanged="klineChagneSelect_SelectionChanged"></ComboBox>
+        <Button x:Name="btnConfirm" Width="75" Height="20" Margin="0, 10, 0, 10" VerticalAlignment="Bottom" Click="click_btnConfirm">confirm</Button>
+    </StackPanel>
+
+</Window>
