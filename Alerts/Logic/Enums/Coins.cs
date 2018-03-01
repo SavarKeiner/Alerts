@@ -8,6 +8,6 @@ namespace Alerts.Logic.Enums
 {
     public enum Coins
     {
-        INTI, Bitcoin, Ethereum
+        INTI, BTC, ETH, BNB, USDT, TRX, NEO, LTC, ADA, IOTA, VEN, XRP
     }
 }

@@ -261,7 +261,7 @@
     <Resource Include="UI\Icons\ic_volume_off_white_24dp_2x.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\bitcoin.svg">
+    <Resource Include="UI\Icons\CoinIcons\BTC.svg">
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="UI\Icons\ExchangeIcons\binance.svg" />
@@ -294,6 +294,36 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Icons\ButtonIcons\ic_notifications_white_24px.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\ETH.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\USDT.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\BNB.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\LTC.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\NEO.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\TRX.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\ADA.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\IOTA.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\VEN.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\XRP.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

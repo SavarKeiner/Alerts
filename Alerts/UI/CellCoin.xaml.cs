@@ -29,8 +29,9 @@ namespace Alerts.UI
     {
         public CellGrid cellGrid;
         public CellCoinHeader header;
-        public Coins coin;
-        public Exchanges exchange;
+        public Coins coin { get; set; }
+        public Coins pair { get; set; }
+        public Exchanges exchange { get; set; }
 
         public CellCoin()
         {
@@ -48,11 +49,12 @@ namespace Alerts.UI
             cellCoinGrid.Children.Add(cellGrid);
         }
 
-        public CellCoin(Coins coin, Exchanges exchange)
+        public CellCoin(Exchanges exchange, Coins pair, Coins coin)
         {
             InitializeComponent();
 
             this.coin = coin;
+            this.pair = pair;
             this.exchange = exchange;
 
             header = new CellCoinHeader(this);
@@ -62,52 +64,17 @@ namespace Alerts.UI
             Grid.SetRow(cellGrid, 1);
 
             header.labelCoin.Content = coin.ToString();
+            header.labelPrice.Content = pair.ToString();
             header.labelExchange.Content = exchange.ToString();
 
             header.btnAdd.Click += (o, e) => { addIndicatorDialog(); };
 
             cellCoinGrid.Children.Add(header);
-            cellCoinGrid.Children.Add(cellGrid);
-
-            header.btnRemove.Click += (o, e) => {
-                testrest();
-            };
-
-            
+            cellCoinGrid.Children.Add(cellGrid);            
         }
 
         private void testrest()
         {
-            int limitkj = 100;
-
-            RestClient client = new RestClient("https://api.binance.com");
-            RestRequest request = new RestRequest("api/v1/klines?symbol=BTCUSDT&interval=5m&limit=" + limitkj);
-
-            IRestResponse response = client.Execute(request);
-
-            JArray jArray = JArray.Parse(response.Content);
-
-            double[] close = new double[limitkj];
-            for (int i = 0; i < jArray.Count; i++)
-            {
-                JToken token = jArray[i];
-
-                string closePriceAsString = token[4].ToString();
-                double closePrice = Double.Parse(closePriceAsString);
-                close[i] = closePrice;
-            }
-
-            int a;
-            int b;
-            double[] c = new double[limitkj];
-            TicTacTec.TA.Library.Core.Rsi(0, limitkj - 1, close, 14, out a, out b, c);
-
-            for (int i = 0; i < c.Length; i++)
-            {
-                System.Diagnostics.Debug.WriteLine("DBG-REST: " + c[i] + " " + a + " " + b);
-            }
-
-
             /*double[] ar = { 4086.29, 4310.01, 4509.08, 4130.37, 3699.99, 3660.02, 4378.48, 4640.00, 5709.99, 5950.02, 6169.98, 7345.01, 5811.03, 8038.00, 9128.02, 11165.41 };
 
             int a;

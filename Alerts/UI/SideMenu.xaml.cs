@@ -40,9 +40,7 @@ namespace Alerts.UI
             Application curApp = Application.Current;
             MainWindow mainWindow = (MainWindow)curApp.MainWindow;
 
-
-
-            if(mainWindow.sideBar.Visibility == Visibility.Collapsed)
+            if (mainWindow.sideBar.Visibility == Visibility.Collapsed)
             {
                 mainWindow.sideBar.Visibility = Visibility.Visible;
                 mainWindow.sideBar.gridExchange.Visibility = Visibility.Visible;

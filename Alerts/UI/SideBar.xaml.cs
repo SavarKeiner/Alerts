@@ -1,5 +1,7 @@
 ﻿using Alerts.Logic.Enums;
 using Alerts.UI.Dialogs;
+using Newtonsoft.Json.Linq;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +24,17 @@ namespace Alerts.UI
     /// </summary>
     public partial class SideBar : UserControl
     {
-        List<ImageTextItem> l = new List<ImageTextItem>();
-        private Exchanges selectedExchange;
-        private Coins selectedCoin;
+        List<ImageTextItem> exchangeSource = new List<ImageTextItem>();
+        List<ImageTextItem> pairingSourceBinance = new List<ImageTextItem>();
+        List<ImageTextItem> coineSourceBinance = new List<ImageTextItem>();
+
+        private Dictionary<Coins, List<Coins>> paringCoinDict = new Dictionary<Coins, List<Coins>>();
+
+        public Exchanges selectedExchange { get; set; }
+        public Coins selectedPairing { get; set; }
+        public Coins selectedCoin { get; set; }
+
+
 
         public SideBar()
         {
@@ -34,8 +44,8 @@ namespace Alerts.UI
             imageTextItem1.image.Source = new Uri("/UI/Icons/ExchangeIcons/binance.svg", UriKind.Relative);
             imageTextItem1.text.Content = "Binance";
 
-            l.Add(imageTextItem1);
-            listExchange.ItemsSource = l;
+            exchangeSource.Add(imageTextItem1);
+            listExchange.ItemsSource = exchangeSource;
 
             gridExchange.IsVisibleChanged += (o, e) =>
             {
@@ -107,7 +117,38 @@ namespace Alerts.UI
 
 
                 gridPairing.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void listPairing_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (((ListBox)e.Source).SelectedItem != null)
+            {
+                selectedPairing = (Coins)Enum.Parse(typeof(Coins), ((ImageTextItem)((ListBox)e.Source).SelectedItem).text.Content.ToString());
                 gridCoin.Visibility = Visibility.Visible;
+
+                List<Coins> lc = new List<Coins>();
+                paringCoinDict.TryGetValue(selectedPairing, out lc);
+
+                coineSourceBinance.Clear();
+                foreach (Coins c in lc)
+                {
+                    try
+                    {
+                        System.Diagnostics.Debug.WriteLine("DBG-EX: " + c);
+
+                        ImageTextItem item = new ImageTextItem();
+                        item.image.Source = new Uri("/UI/Icons/CoinIcons/" + c + ".svg", UriKind.Relative);
+                        item.text.Content = c;
+
+                        coineSourceBinance.Add(item);
+                    } catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("DBG-EX: " + ex.Message + " " + ex.StackTrace);
+                    }
+                }
+                listCoins.ItemsSource = null;
+                listCoins.ItemsSource = coineSourceBinance;
             }
         }
 
@@ -115,7 +156,7 @@ namespace Alerts.UI
         {
             if (((ListBox)e.Source).SelectedItem != null)
             {
-                selectedCoin = (Coins)Enum.Parse(typeof(Coins), (string)((ImageTextItem)((ListBox)e.Source).SelectedItem).text.Content);
+                selectedCoin = (Coins)Enum.Parse(typeof(Coins), ((ImageTextItem)((ListBox)e.Source).SelectedItem).text.Content.ToString());
 
                 CellGridAddPopup dialog = new CellGridAddPopup();
                 dialog.Exchange = selectedExchange;
@@ -129,25 +170,75 @@ namespace Alerts.UI
                     Application curApp = Application.Current;
                     MainWindow mainWindow = (MainWindow)curApp.MainWindow;
 
-                    CellCoin cellCoin = new CellCoin(selectedCoin, selectedExchange);
+                    CellCoin cellCoin = new CellCoin(selectedExchange, selectedPairing, selectedCoin);
 
                     cellCoin.cellGrid.addIndicator(dialog.KlinesWidth, dialog.Indicator, dialog.Condition, dialog.ConditionValue);
 
+
+                    this.Visibility = Visibility.Collapsed;
+                    gridCoin.Visibility = Visibility.Collapsed;
+                    gridPairing.Visibility = Visibility.Collapsed;
+                    gridExchange.Visibility = Visibility.Collapsed;
                     mainWindow.listCellCoin.Children.Add(cellCoin);
                 }
+
+                listCoins.UnselectAll();
             }
         }
 
         private void setBinanceCoins()
         {
-            List<ImageTextItem> list = new List<ImageTextItem>();
+            //todo: needs try catch over coin/pair
+            if (listPairing.ItemsSource != null)
+                return;
 
-            ImageTextItem imageTextItem1 = new ImageTextItem();
-            imageTextItem1.image.Source = new Uri("/UI/Icons/CoinIcons/bitcoin.svg", UriKind.Relative);
-            imageTextItem1.text.Content = Coins.Bitcoin.ToString();
+            RestClient client = new RestClient("https://api.binance.com");
+            RestRequest request = new RestRequest("api/v1/exchangeInfo");
 
-            list.Add(imageTextItem1);
-            listCoins.ItemsSource = list;
+            IRestResponse response = client.Execute(request);
+
+            JToken jt = JToken.Parse(response.Content).SelectToken("symbols");
+
+            foreach (JToken token in jt)
+            {
+                if(token.SelectToken("quoteAsset").ToString() == "456")//dont know why this pairing exists
+                    continue;
+
+                try
+                {
+                    Coins k = (Coins)Enum.Parse(typeof(Coins), token.SelectToken("quoteAsset").ToString());
+                    Coins v = (Coins)Enum.Parse(typeof(Coins), token.SelectToken("baseAsset").ToString());
+
+                    if (!paringCoinDict.ContainsKey(k))
+                    {
+                        List<Coins> lv = new List<Coins>();
+                        lv.Add(v);
+
+                        paringCoinDict.Add(k, lv);
+                    }
+                    else
+                    {
+                        List<Coins> lv = new List<Coins>();
+                        paringCoinDict.TryGetValue(k, out lv);
+                        lv.Add(v);
+                    }
+                    
+                    //paringCoinDict.Add((Coins)Enum.Parse(typeof(Coins), token.SelectToken("quoteAsset").ToString()), (Coins)Enum.Parse(typeof(Coins), token.SelectToken("baseAsset").ToString()));
+                } catch(Exception e)
+                {
+                    //do nothing for now
+                }
+                
+            }
+            foreach(KeyValuePair<Coins, List<Coins>> entry in paringCoinDict)
+            {
+                ImageTextItem item = new ImageTextItem();
+                item.image.Source = new Uri("/UI/Icons/CoinIcons/" + entry.Key + ".svg", UriKind.Relative);
+                item.text.Content = entry.Key;
+
+                pairingSourceBinance.Add(item);
+            }
+            listPairing.ItemsSource = pairingSourceBinance;
         }
     }
 }

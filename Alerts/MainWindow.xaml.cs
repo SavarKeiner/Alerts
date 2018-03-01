@@ -49,16 +49,16 @@ namespace Alerts
             {
                 if(lastCellCoin == null)
                 {
-                    Canvas.SetTop(cc, 0);
-                    Canvas.SetLeft(cc, 0);
+                    //Canvas.SetTop(cc, 0);
+                    //Canvas.SetLeft(cc, 0);
                 } else
                 {
                     Canvas.SetTop(cc, lastY);
-                    Canvas.SetLeft(cc, 0);
+                    //Canvas.SetLeft(cc, 0);
                 }
                 
 
-                cc.Width = listCellCoin.ActualWidth;
+                cc.Width = listCellCoin.Width;
                 lastCellCoin = cc;
                 lastY += cc.ActualHeight;
             }
@@ -66,7 +66,9 @@ namespace Alerts
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            scrollViewer.Width = e.NewSize.Width;
+            System.Diagnostics.Debug.WriteLine("shit: " + e.NewSize.Width + " " + sideMenu.ActualWidth);
+
+            listCellCoin.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
             reSize();
         }
     }

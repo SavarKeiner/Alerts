@@ -42,7 +42,7 @@
                     <Label Content="Pairing" Height="40" VerticalContentAlignment="Center" Foreground="White" Background="#3063ad" FontFamily="Courier" FontWeight="Bold" FontSize="18"></Label>
                 </Border>
 
-                <ListBox Grid.Row="1" x:Name="listPairing" Background="#3063ad" BorderThickness="0,0,1,0" BorderBrush="White">
+                <ListBox Grid.Row="1" x:Name="listPairing" Background="#3063ad" BorderThickness="0,0,1,0" BorderBrush="White" SelectionChanged="listPairing_SelectionChanged">
 
                 </ListBox>
             </Grid>

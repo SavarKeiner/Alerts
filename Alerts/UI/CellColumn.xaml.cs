@@ -67,7 +67,7 @@ namespace Alerts.UI
                 while (!shoudStop)
                 {
                     RestClient client = new RestClient("https://api.binance.com");
-                    RestRequest request = new RestRequest("api/v1/klines?symbol=BTCUSDT&interval=" + App.candleStickWidthToString(KlineWidth) + "&limit=" + limit);
+                    RestRequest request = new RestRequest("api/v1/klines?symbol=" + cellGrid.cellCoin.coin + cellGrid.cellCoin.pair + "&interval=" + App.candleStickWidthToString(KlineWidth) + "&limit=" + limit);
 
                     IRestResponse response = client.Execute(request);
 
