@@ -48,6 +48,7 @@ namespace Alerts.UI
             else if(mainWindow.sideBar.Visibility == Visibility.Visible)
             {
                 mainWindow.sideBar.Visibility = Visibility.Collapsed;
+                mainWindow.sideBar.gridCondition.Visibility = Visibility.Collapsed;
                 mainWindow.sideBar.gridCoin.Visibility = Visibility.Collapsed;
                 mainWindow.sideBar.gridPairing.Visibility = Visibility.Collapsed;
                 mainWindow.sideBar.gridExchange.Visibility = Visibility.Collapsed;

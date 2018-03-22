@@ -6,27 +6,21 @@
              xmlns:local="clr-namespace:Alerts.UI"
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="250" MaxHeight="30">
+             d:DesignHeight="30" d:DesignWidth="110">
 
     <UserControl.Resources>
-        <Image x:Key="mute" Source="{svgc:SvgImage Source=/UI/icons/ButtonIcons/ic_volume_off_white_24px.svg}"></Image>
         <Image x:Key="remove" Source="{svgc:SvgImage Source=/UI/icons/ButtonIcons/ic_remove_white_24px.svg}"></Image>
     </UserControl.Resources>
 
 
-        <DockPanel Background="#707070">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0">
-                <Label x:Name="labelCondition" Content="BELOW" FontFamily="Courier" FontSize="12" Foreground="WhiteSmoke" FontWeight="SemiBold"></Label>
-                <Label x:Name="labelConditionValue" Content="30" FontFamily="Courier" FontSize="12" Foreground="WhiteSmoke" FontWeight="SemiBold"></Label>
-            </StackPanel>
+    <DockPanel Background="#707070">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0">
+            <Label x:Name="labelCondition" Content="BELOW" FontFamily="Courier" Foreground="WhiteSmoke" FontWeight="SemiBold"></Label>
+            <Label x:Name="labelConditionValue" Content="30" FontFamily="Courier" Foreground="WhiteSmoke" FontWeight="SemiBold"></Label>
+        </StackPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,5,5">
-                <Button x:Name="btnRemove" Content="{StaticResource remove}" Padding="3" Margin="0,0,5,0" Width="20" Height="20" FontFamily="Courier" FontWeight="Bold" Foreground="WhiteSmoke" Background="#505050" Click="btnRemove_Click"></Button>
-                <Button x:Name="btnMute" Content="{StaticResource mute}" Padding="3" Width="20" Height="20" FontFamily="Courier" FontWeight="SemiBold" Foreground="WhiteSmoke" Background="#505050" Click="btnMute_Click"></Button>
-            </StackPanel>
-        </DockPanel>
-
-
-
-
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,5,5">
+            <Button x:Name="btnRemove" Content="{StaticResource remove}" Padding="3"  Width="20" Height="20" FontFamily="Courier" FontWeight="Bold" Foreground="WhiteSmoke" Background="#505050" Click="btnRemove_Click"></Button>
+        </StackPanel>
+    </DockPanel>
 </UserControl>

@@ -24,8 +24,8 @@ namespace Alerts.UI
     /// </summary>
     public partial class CellIndicator : UserControl
     {
-        public CellColumn cellColumn;
-        public CandleStickWidth candlestickWidth;
+        /*public CellColumn cellColumn;
+        public CandleWidth candlestickWidth;
         public Indicators indicator;
         private const int optInTimePeriod = 14;
 
@@ -34,7 +34,7 @@ namespace Alerts.UI
             InitializeComponent();
         }
 
-        public CellIndicator(CellColumn cellColumn, CandleStickWidth candlestickWidth,Indicators indicator)
+        public CellIndicator(CellColumn cellColumn, CandleWidth candlestickWidth,Indicators indicator)
         {
             InitializeComponent();
 
@@ -69,7 +69,7 @@ namespace Alerts.UI
             cellColumn.cellGrid.setPosition();
         }
 
-        private void calcIndicators(Object sender, KlinesPulledEventArgs e)
+        private void calcIndicators(Object sender, CandlePulledEventArgs e)
         {
             this.Dispatcher.Invoke(() => {
                 if (indicator == Indicators.RSI)
@@ -161,6 +161,6 @@ namespace Alerts.UI
         ~CellIndicator()
         {
             cellColumn.KlinesPulled -= calcIndicators;
-        }
+        }*/
     }
 }

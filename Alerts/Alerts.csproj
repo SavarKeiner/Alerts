@@ -49,6 +49,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -124,23 +130,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Logic\Enums\CandleStickWidth.cs" />
+    <Compile Include="Logic\ChartIF.cs" />
+    <Compile Include="Logic\Converter\doubleToString.cs" />
+    <Compile Include="Logic\Converter\longToDateTimeString.cs" />
+    <Compile Include="Logic\Enums\CandleWidth.cs" />
     <Compile Include="Logic\Enums\Coins.cs" />
     <Compile Include="Logic\Enums\Exchanges.cs" />
     <Compile Include="Logic\Enums\IndicatorConditions.cs" />
     <Compile Include="Logic\Enums\Indicators.cs" />
-    <Compile Include="Logic\Events\KlinesPulledEventArgs.cs" />
-    <Compile Include="UI\CellCoin.xaml.cs">
-      <DependentUpon>CellCoin.xaml</DependentUpon>
+    <Compile Include="Logic\Events\CandlePulledEventArgs.cs" />
+    <Compile Include="Logic\Events\CandlePullEventArgs.cs" />
+    <Compile Include="Logic\ExchangeCode\Binance.cs" />
+    <Compile Include="Logic\Interfaces\ExchangeIF.cs" />
+    <Compile Include="Logic\Interfaces\CandleIF.cs" />
+    <Compile Include="Logic\RESTObjects\CandleBinance.cs" />
+    <Compile Include="UI\AertLayout.xaml.cs">
+      <DependentUpon>AertLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\CellColumn.xaml.cs">
-      <DependentUpon>CellColumn.xaml</DependentUpon>
+    <Compile Include="UI\AlertCard.xaml.cs">
+      <DependentUpon>AlertCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\CellCondition.xaml.cs">
       <DependentUpon>CellCondition.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\CellGrid.xaml.cs">
-      <DependentUpon>CellGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\CellHeader.xaml.cs">
       <DependentUpon>CellHeader.xaml</DependentUpon>
@@ -157,6 +168,16 @@
     <Compile Include="UI\Dialogs\CellIndicatorAddPopup.xaml.cs">
       <DependentUpon>CellIndicatorAddPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Graphs\ChartToolTip.xaml.cs">
+      <DependentUpon>ChartToolTip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Graphs\Graph.xaml.cs">
+      <DependentUpon>Graph.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Graphs\LineChart.xaml.cs">
+      <DependentUpon>LineChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Graphs\LineChartModel.cs" />
     <Compile Include="UI\ImageTextItem.xaml.cs">
       <DependentUpon>ImageTextItem.xaml</DependentUpon>
     </Compile>
@@ -178,19 +199,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI\CellCoin.xaml">
+    <Page Include="UI\AertLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\CellColumn.xaml">
+    <Page Include="UI\AlertCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\CellCondition.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\CellGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,6 +228,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dialogs\CellIndicatorAddPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Graphs\ChartToolTip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Graphs\Graph.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Graphs\LineChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,6 +273,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

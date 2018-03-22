@@ -14,58 +14,62 @@ namespace Alerts
     /// </summary>
     public partial class App : Application
     {
+        public static int Clamp(int value, int min, int max)
+        {
+            return (value < min) ? min : (value > max) ? max : value;
+        }
 
-        public static string candleStickWidthToString(CandleStickWidth width)
+        public static string candleStickWidthToString(CandleWidth width)
         {
             switch (width)
             {
-                case CandleStickWidth.m5:
+                case CandleWidth.m5:
                     return "5m";
-                case CandleStickWidth.m15:
+                case CandleWidth.m15:
                     return "15m";
-                case CandleStickWidth.m30:
+                case CandleWidth.m30:
                     return "30m";
-                case CandleStickWidth.h1:
+                case CandleWidth.h1:
                     return "1h";
-                case CandleStickWidth.h2:
+                case CandleWidth.h2:
                     return "2h";
-                case CandleStickWidth.h4:
+                case CandleWidth.h4:
                     return "4h";
-                case CandleStickWidth.h12:
+                case CandleWidth.h12:
                     return "12h";
-                case CandleStickWidth.d1:
+                case CandleWidth.d1:
                     return "1d";
-                case CandleStickWidth.w1:
+                case CandleWidth.w1:
                     return "1w";
                 default:
                     return "init";
             }
         }
 
-        public static CandleStickWidth stringToCandleStickWidth(string width)
+        public static CandleWidth stringToCandleStickWidth(string width)
         {
             switch (width)
             {
                 case "5m":
-                    return CandleStickWidth.m5;
+                    return CandleWidth.m5;
                 case "15m":
-                    return CandleStickWidth.m15;
+                    return CandleWidth.m15;
                 case "30m":
-                    return CandleStickWidth.m30;
+                    return CandleWidth.m30;
                 case "1h":
-                    return CandleStickWidth.h1;
+                    return CandleWidth.h1;
                 case "2h":
-                    return CandleStickWidth.h2;
+                    return CandleWidth.h2;
                 case "4h":
-                    return CandleStickWidth.h4;
+                    return CandleWidth.h4;
                 case "12h":
-                    return CandleStickWidth.h12;
+                    return CandleWidth.h12;
                 case "1d":
-                    return CandleStickWidth.d1;
+                    return CandleWidth.d1;
                 case "1w":
-                    return CandleStickWidth.w1;
+                    return CandleWidth.w1;
                 default:
-                    return CandleStickWidth.INIT;
+                    return CandleWidth.INIT;
             }
         }
     }

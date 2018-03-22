@@ -17,24 +17,22 @@
 
     <DockPanel>
 
-        <Border BorderBrush="#007ED8" BorderThickness="0,0,0,2">
-            <StackPanel Orientation="Vertical">
-                <DockPanel LastChildFill = "True" Background="#1B1B1B">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Label x:Name="labelCoin" Content="coin" FontSize="16" FontFamily="Courier" FontWeight="SemiBold" Foreground="White" VerticalContentAlignment="Center" ></Label>
-                        <Label x:Name="labelPrice" Content="price" FontSize="16" FontFamily="Courier" FontWeight="SemiBold" Foreground="White" VerticalContentAlignment="Center"></Label>
-                        <Label x:Name="labelExchange" Content="exchange" FontSize="16" FontFamily="Courier" FontWeight="SemiBold" Foreground="White" VerticalContentAlignment="Center"></Label>
-                    </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <DockPanel LastChildFill = "True" Background="#2b5797">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label x:Name="labelExchange" Content="exchange" FontSize="16" FontFamily="Courier" FontWeight="SemiBold" Foreground="White" VerticalContentAlignment="Center"></Label>
+                    <Label x:Name="labelCoin" Content="coin" FontSize="16" FontFamily="Courier" FontWeight="SemiBold" Foreground="White" VerticalContentAlignment="Center" ></Label>
+                    <Label x:Name="labelPrice" Content="price" FontSize="16" FontFamily="Courier" FontWeight="SemiBold" Foreground="White" VerticalContentAlignment="Center"></Label>
+                </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="btnAdd" Content="{StaticResource add}" Padding="3" Margin="5,0,5,0" Background="#303030" Height="20" Width="20"></Button>
-                        <Button x:Name="btnRemove" Content="{StaticResource remove}" Padding="3" Margin="0,0,5,0" Background="#303030" Height="20" Width="20"></Button>
-                        <Button x:Name="btnMute" Content="{StaticResource mute}" Padding="3" Margin="0,0,5,0" Background="#303030" Height="20" Width="20"></Button>
-                        <Button x:Name="btnLaunch" Content="{StaticResource launch}" Padding="3" Margin="0,0,5,0" Height="20" Width="20" Background="#303030"></Button>
-                    </StackPanel>
-                </DockPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="btnAdd" Content="{StaticResource add}" Padding="3" Margin="5,0,5,0" Background="#303030" Height="20" Width="20"></Button>
+                    <Button x:Name="btnRemove" Content="{StaticResource remove}" Padding="3" Margin="0,0,5,0" Background="#303030" Height="20" Width="20"></Button>
+                    <Button x:Name="btnMute" Content="{StaticResource mute}" Padding="3" Margin="0,0,5,0" Background="#303030" Height="20" Width="20"></Button>
+                    <Button x:Name="btnLaunch" Content="{StaticResource launch}" Padding="3" Margin="0,0,5,0" Height="20" Width="20" Background="#303030"></Button>
+                </StackPanel>
+            </DockPanel>
 
-            </StackPanel>
-        </Border>
+        </StackPanel>
     </DockPanel>
 </UserControl>

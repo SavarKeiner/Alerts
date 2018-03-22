@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Alerts.Logic.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Alerts.Logic.Enums;
 
 namespace Alerts.UI
 {
@@ -20,8 +22,45 @@ namespace Alerts.UI
     /// </summary>
     public partial class CellCoinHeader : UserControl
     {
-        CellCoin cell;
-
+        private Exchanges exchange;
+        private string symbol;
+        private double price;
+        public Exchanges Exchange
+        {
+            get
+            {
+                return exchange;
+            }
+            set
+            {
+                exchange = value;
+                labelExchange.Content = value.ToString().ToUpper();
+            }
+        }
+        public string Symbol
+        {
+            get
+            {
+                return symbol;
+            }
+            set
+            {
+                symbol = value;
+                labelCoin.Content = value;
+            }
+        }
+        public double Price
+        {
+            get
+            {
+                return price;
+            }
+            set
+            {
+                price = value;
+                labelPrice.Content = value.ToString("0.00000000");
+            }
+        }
 
         public CellCoinHeader()
         {
@@ -29,13 +68,14 @@ namespace Alerts.UI
 
         }
 
-
-        public CellCoinHeader(CellCoin cell)
+        public void initPull(Object o, CandlePullEventArgs e)
         {
-            InitializeComponent();
-
-            this.cell = cell;
-            
+            if (e.Width == Logic.Enums.CandleWidth.INIT)
+            {
+                this.Dispatcher.Invoke(() => {
+                    labelPrice.Content = e.candleList[e.candleList.Count - 1].getClose().ToString("0.00000000");
+                });
+            }
         }
     }
 }

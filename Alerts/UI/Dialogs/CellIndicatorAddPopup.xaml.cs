@@ -21,8 +21,8 @@ namespace Alerts.UI.Dialogs
     /// </summary>
     public partial class CellIndicatorAddPopup : Window
     {
-        public CandleStickWidth KlinesWidth { get; set; }
-        public CandleStickWidth KlinesChange { get; set; }
+        public CandleWidth KlinesWidth { get; set; }
+        public CandleWidth KlinesChange { get; set; }
         public Indicators Indicator { get; set; }
         public IndicatorConditions Condition { get; set; }
         public double ConditionValue { get; set; }
@@ -32,7 +32,7 @@ namespace Alerts.UI.Dialogs
             InitializeComponent();
         }
 
-        public CellIndicatorAddPopup(CellHeader header, CandleStickWidth candlestickWidth, Indicators indicator)
+        public CellIndicatorAddPopup(CellHeader header, CandleWidth candlestickWidth, Indicators indicator)
         {
             InitializeComponent();
             this.KlinesWidth = candlestickWidth;
@@ -76,10 +76,10 @@ namespace Alerts.UI.Dialogs
         {
             List<string> data = new List<string>();
 
-            Array ar = Enum.GetValues(typeof(CandleStickWidth));
+            Array ar = Enum.GetValues(typeof(CandleWidth));
             for (int i = 1; i < ar.Length; i++)
             {
-                data.Add(App.candleStickWidthToString((CandleStickWidth)ar.GetValue(i)));
+                data.Add(App.candleStickWidthToString((CandleWidth)ar.GetValue(i)));
             }
 
             ((ComboBox)e.Source).ItemsSource = data;
@@ -93,7 +93,7 @@ namespace Alerts.UI.Dialogs
 
         private void klineChagneSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            KlinesChange = (CandleStickWidth)Enum.Parse(typeof(CandleStickWidth), App.stringToCandleStickWidth(((ComboBox)e.Source).SelectedItem.ToString()).ToString());
+            KlinesChange = (CandleWidth)Enum.Parse(typeof(CandleWidth), App.stringToCandleStickWidth(((ComboBox)e.Source).SelectedItem.ToString()).ToString());
         }
 
         private void textValue_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

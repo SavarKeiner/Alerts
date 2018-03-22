@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alerts.Logic.Enums
+namespace Alerts.Logic
 {
-    public enum Coins
+    interface ChartIF
     {
-        INIT, BTC, ETH, BNB, USDT, TRX, NEO, LTC, ADA, IOTA, VEN, XRP
+
     }
 }

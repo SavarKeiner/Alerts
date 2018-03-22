@@ -21,7 +21,7 @@ namespace Alerts.UI.Dialogs
     public partial class CellGridAddPopup : Window
     {
         public Indicators Indicator{ get; set; }
-        public CandleStickWidth KlinesWidth { get; set; }
+        public CandleWidth KlinesWidth { get; set; }
         public IndicatorConditions Condition { get; set; }
         public Exchanges Exchange { get; set; }
         public Coins Coin { get; set; }
@@ -60,10 +60,10 @@ namespace Alerts.UI.Dialogs
         {
             List<string> data = new List<string>();
 
-            Array ar = Enum.GetValues(typeof(CandleStickWidth));
+            Array ar = Enum.GetValues(typeof(CandleWidth));
             for (int i = 1; i < ar.Length; i++)
             {
-                data.Add(App.candleStickWidthToString((CandleStickWidth)ar.GetValue(i)));
+                data.Add(App.candleStickWidthToString((CandleWidth)ar.GetValue(i)));
             }
 
             ((ComboBox)e.Source).ItemsSource = data;
@@ -81,7 +81,7 @@ namespace Alerts.UI.Dialogs
 
         private void btnVolumeClick(object sender, RoutedEventArgs e)
         {
-            Indicator = Indicators.VOLUME;
+            //Indicator = Indicators.VOLUME;
         }
 
         private void btnPriceClick(object sender, RoutedEventArgs e)
@@ -101,7 +101,7 @@ namespace Alerts.UI.Dialogs
 
         private void candlestickWidth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            KlinesWidth = (CandleStickWidth)Enum.Parse(typeof(CandleStickWidth), App.stringToCandleStickWidth(((ComboBox)e.Source).SelectedItem.ToString()).ToString());
+            KlinesWidth = (CandleWidth)Enum.Parse(typeof(CandleWidth), App.stringToCandleStickWidth(((ComboBox)e.Source).SelectedItem.ToString()).ToString());
         }
 
         private void textValue_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

@@ -21,6 +21,7 @@ namespace Alerts
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,6 +30,9 @@ namespace Alerts
             sideBar.gridExchange.Visibility = Visibility.Collapsed;
             sideBar.gridPairing.Visibility = Visibility.Collapsed;
             sideBar.gridCoin.Visibility = Visibility.Collapsed;
+            sideBar.gridCondition.Visibility = Visibility.Collapsed;
+
+            //listCellCoin.Children.Add(new AlertLayout { Exchange = Logic.Enums.Exchanges.Binance, Coin = Logic.Enums.Coins.ETH, Pair = Logic.Enums.Coins.BTC});
         }
 
         public void addCellCoin()
@@ -43,22 +47,16 @@ namespace Alerts
 
         public void reSize()
         {
-            CellCoin lastCellCoin = null;
+            AlertLayout lastCellCoin = null;
             double lastY = 0;
-            foreach (CellCoin cc in listCellCoin.Children)
+            foreach (AlertLayout cc in listCellCoin.Children)
             {
-                if(lastCellCoin == null)
-                {
-                    //Canvas.SetTop(cc, 0);
-                    //Canvas.SetLeft(cc, 0);
-                } else
-                {
-                    Canvas.SetTop(cc, lastY);
-                    //Canvas.SetLeft(cc, 0);
-                }
-                
 
-                cc.Width = listCellCoin.Width;
+                Canvas.SetTop(cc, lastY);
+                cc.Width = listCellCoin.ActualWidth;
+
+
+                cc.Width = listCellCoin.ActualWidth;
                 lastCellCoin = cc;
                 lastY += cc.ActualHeight;
             }
@@ -66,7 +64,7 @@ namespace Alerts
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("shit: " + e.NewSize.Width + " " + sideMenu.ActualWidth);
+            //System.Diagnostics.Debug.WriteLine("shit: " + e.NewSize.Width + " " + sideMenu.ActualWidth);
 
             listCellCoin.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
             reSize();

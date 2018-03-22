@@ -23,8 +23,8 @@ namespace Alerts.UI
     /// </summary>
     public partial class CellHeader : UserControl
     {
-        public CellIndicator cellIndicator;
-        public CandleStickWidth candlestickWidth;
+        /*public CellIndicator cellIndicator;
+        public CandleWidth candlestickWidth;
         private Indicators _indicator;
         private double _pvalue;
         private double _pvalueChange;
@@ -71,22 +71,22 @@ namespace Alerts.UI
             InitializeComponent();
         }
 
-        public CellHeader(CellIndicator cellIndicator, CandleStickWidth candlestickWidth, Indicators indicator)
+        public CellHeader(CellIndicator cellIndicator, CandleWidth candlestickWidth, Indicators indicator)
         {
             InitializeComponent();
             this.cellIndicator = cellIndicator;
             this.candlestickWidth = candlestickWidth;
             this.indicator = indicator;
         }
-
+        */
         private void btnAddCondition_Click(object sender, RoutedEventArgs e)
         {
-            CellIndicatorAddPopup addPopup = new CellIndicatorAddPopup(this, candlestickWidth, indicator);
+            /*CellIndicatorAddPopup addPopup = new CellIndicatorAddPopup(this, candlestickWidth, indicator);
             addPopup.ShowDialog();
             if(addPopup.DialogResult.HasValue && addPopup.DialogResult.Value == true)
             {
                 cellIndicator.addCondition(addPopup.Condition, addPopup.ConditionValue);
-            }
+            }*/
         }
 
         private void btnMuteAll_Click(object sender, RoutedEventArgs e)
@@ -95,7 +95,7 @@ namespace Alerts.UI
 
         private void btnRemoveAll_Click(object sender, RoutedEventArgs e)
         {
-            cellIndicator.removeAll();
+            //cellIndicator.removeAll();
         }
     }
 }

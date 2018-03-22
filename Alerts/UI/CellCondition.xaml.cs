@@ -22,7 +22,8 @@ namespace Alerts.UI
     public partial class CellCondition : UserControl
     {
         public CellIndicator cellIndicator;
-        public CandleStickWidth candlestickWidth { get; set; }
+        public AlertCard card;
+        public CandleWidth candlestickWidth { get; set; }
 
         private IndicatorConditions _indicatorCondition;
         public IndicatorConditions indicatorCondition {
@@ -50,7 +51,15 @@ namespace Alerts.UI
             InitializeComponent();
         }
 
-        public CellCondition(CellIndicator cellIndicator, CandleStickWidth candlestickWidth, IndicatorConditions indicatorCondition, double value)
+        public CellCondition(AlertCard card, IndicatorConditions indicatorCondition, double value)
+        {
+            InitializeComponent();
+            this.indicatorCondition = indicatorCondition;
+            this.value = value;
+            this.card = card;
+        }
+
+        public CellCondition(CellIndicator cellIndicator, CandleWidth candlestickWidth, IndicatorConditions indicatorCondition, double value)
         {
             InitializeComponent();
             this.cellIndicator = cellIndicator;
@@ -62,7 +71,9 @@ namespace Alerts.UI
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            cellIndicator.removeCondition(this);
+            
+            //cellIndicator.removeCondition(this);
+            card.listCondition.Children.Remove(this);
         }
 
         private void btnMute_Click(object sender, RoutedEventArgs e)
