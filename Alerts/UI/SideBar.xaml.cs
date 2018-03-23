@@ -38,6 +38,8 @@ namespace Alerts.UI
         private IndicatorConditions selectedCondition { get; set; } = IndicatorConditions.CROSS;
         private CandleWidth selectedWidth { get; set; } = CandleWidth.m5;
 
+        private double ConditionValue { get; set; } = 0;
+
         public SideBar()
         {
             InitializeComponent();
@@ -284,6 +286,7 @@ namespace Alerts.UI
             conditionBox.SelectedIndex = 0;
             widthBox.SelectedIndex = 0;
             textValue.Value = 0.0d;
+            ConditionValue = 0.0d;
 
             selectedIndicator = Indicators.PRICE;
             selectedCondition = IndicatorConditions.CROSS;
@@ -361,13 +364,8 @@ namespace Alerts.UI
                 Application curApp = Application.Current;
                 MainWindow mainWindow = (MainWindow)curApp.MainWindow;
 
-                AlertLayout alert = new AlertLayout(selectedExchange, selectedCoin, selectedPairing);
-                alert.Exchange = selectedExchange;
-                alert.Coin = selectedCoin;
-                alert.Pair = selectedPairing;
-                AlertCard card = new AlertCard(selectedWidth, selectedExchange, selectedCoin, selectedPairing, selectedIndicator);
-                card.addCondition(selectedCondition, (double)textValue.Value);
-                alert.addTo(card);
+                var v = ConditionValue;
+                mainWindow.addIndicator(selectedExchange, selectedCoin, selectedPairing, selectedWidth, selectedIndicator, selectedCondition, ConditionValue);
 
                 this.Visibility = Visibility.Collapsed;
                 gridCondition.Visibility = Visibility.Collapsed;
@@ -375,10 +373,12 @@ namespace Alerts.UI
                 gridPairing.Visibility = Visibility.Collapsed;
                 gridExchange.Visibility = Visibility.Collapsed;
 
-
-                mainWindow.listCellCoin.Children.Add(alert);
-                mainWindow.reSize();
             }
+        }
+
+        private void textValue_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            ConditionValue = (double)e.NewValue;
         }
     }
 }

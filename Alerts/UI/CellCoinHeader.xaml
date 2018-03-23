@@ -15,7 +15,8 @@
         <Image x:Key="remove" Source="{svgc:SvgImage Source=/UI/icons/ButtonIcons/ic_remove_white_24px.svg}"></Image>
     </UserControl.Resources>
 
-    <DockPanel>
+    <Border BorderThickness="0,0,0,2" BorderBrush="White">
+            <DockPanel>
 
         <StackPanel Orientation="Vertical">
             <DockPanel LastChildFill = "True" Background="#2b5797">
@@ -35,4 +36,6 @@
 
         </StackPanel>
     </DockPanel>
+    </Border>
+
 </UserControl>

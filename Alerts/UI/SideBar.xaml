@@ -252,7 +252,7 @@
                     <ComboBox x:Name="indicatorBox" Margin="5" IsEditable="True" IsReadOnly="True"  Text="Select Indicator" Loaded="indicatorBox_Loaded" SelectionChanged="indicatorBox_SelectionChanged"></ComboBox>
                     <ComboBox x:Name="conditionBox" Margin="5" IsEditable="True" IsReadOnly="True"  Text="Select Condition" Loaded="conditionBox_Loaded" SelectionChanged="conditionBox_SelectionChanged"></ComboBox>
                     <ComboBox x:Name="widthBox" Margin="5" Loaded="widthBox_Loaded" SelectionChanged="widthBox_SelectionChanged" FontWeight="SemiBold" FontSize="14"></ComboBox>
-                    <xctk:DoubleUpDown x:Name="textValue" FormatString="F2" Margin="5">
+                    <xctk:DoubleUpDown x:Name="textValue" FormatString="F2" Margin="5" ValueChanged="textValue_ValueChanged">
                         <xctk:DoubleUpDown.Style>
                             <Style TargetType="{x:Type xctk:DoubleUpDown}">
                                 <Setter Property="Background" Value="#3063ad"></Setter>

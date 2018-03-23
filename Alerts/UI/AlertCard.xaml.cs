@@ -31,17 +31,17 @@ namespace Alerts.UI
     /// </summary>
     public partial class AlertCard : UserControl
     {
-        private CandleWidth _kLineWidth;
+        private CandleWidth _candleWidth;
         private const int maxPoints = 20;
-        public CandleWidth KlineWidth
+        public CandleWidth CandleWidth
         {
             get
             {
-                return _kLineWidth;
+                return _candleWidth;
             }
             set
             {
-                _kLineWidth = value;
+                _candleWidth = value;
                 klineWidth.Content = App.candleStickWidthToString(value);
 
                 var step = value.ToString()[0];
@@ -62,7 +62,7 @@ namespace Alerts.UI
                     {
                         AxisStep = (long)TimeSpan.FromDays(int.Parse(value.ToString().Substring(1))).TotalMilliseconds * 4;
                         AxisUnit = TimeSpan.FromDays(int.Parse(value.ToString().Substring(1))).TotalMilliseconds * 4;
-                        Formatter = value1 => (new DateTime(1970, 1, 1)).AddMilliseconds((long)value1).ToString("MM:dd");
+                        FormatterX = value1 => (new DateTime(1970, 1, 1)).AddMilliseconds((long)value1).ToString("MM:dd");
                     }
                 }
             }
@@ -132,23 +132,25 @@ namespace Alerts.UI
         }
 
         public SeriesCollection SeriesCollection { get; set; }
-        public Func<double, string> Formatter { get; set; }
+        public Func<double, string> FormatterX { get; set; }
+        public Func<double, string> FormatterY { get; set; }
         public Func<ChartPoint, string> LabelPoint { get; set; }
         public long AxisStep { get; set; }
         public double AxisUnit { get; set; }
 
-        public AlertCard(CandleWidth KlineWidth, Exchanges Exchange, Coins Coin, Coins Pair, Indicators Indicator)
+        public AlertCard(CandleWidth CandleWidth, Exchanges Exchange, Coins Coin, Coins Pair, Indicators Indicator)
         {
             InitializeComponent();
 
-            this.KlineWidth = KlineWidth;
+            this.CandleWidth = CandleWidth;
             this.Exchange = Exchange;
             this.Coin = Coin;
             this.Pair = Pair;
             this.Indicator = Indicator;
 
             //15212094872460000000
-            Formatter = value => (new DateTime(1970, 1, 1)).AddMilliseconds((long)value).ToString("HH:mm");
+            FormatterX = value => (new DateTime(1970, 1, 1)).AddMilliseconds((long)value).ToString("HH:mm");
+            FormatterY = value => (value.ToString("0.00000000", CultureInfo.InvariantCulture));
             //LabelPoint = chartPoint => chartPoint.Y.ToString("0.00") + (new DateTime(1970, 1, 1)).AddMilliseconds(chartPoint.X).ToString("yyyy:MM:dd:HH:mm:ss");
             //Formatter = value => (new DateTime(1970, 1, 1)).AddTicks((long)value).ToString("HH:mm");
             DataContext = this;
@@ -163,35 +165,26 @@ namespace Alerts.UI
         {
             try
             {
-                if(Indicator == Indicators.RSI)
-                {
-                    List<CandleIF> list = e.candleList;
-                    //ChartValues<LineChartModel> model = ((ChartValues<LineChartModel>)SeriesCollection[0]);
-                    ChartValues<LineChartModel> model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
-                    int optInTimePeriod = 14;
-                    int a;
-                    int b = 0;
-                    double[] c = new double[e.candleList.Count];
+                List<CandleIF> list = e.candleList;
+                ChartValues<LineChartModel> model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
+                int optInTimePeriod = 14;
+                int a;
+                int b = 0;
+                double[] c = new double[e.candleList.Count];
 
+                if (Indicator == Indicators.RSI)
+                {
+                    model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
                     double[] closeArr = list.Select(x => x.getClose()).ToArray();
-                    if (Indicator == Indicators.RSI)
-                    {
-                        TicTacTec.TA.Library.Core.Rsi(0, e.candleList.Count - 1, closeArr, optInTimePeriod, out a, out b, c);
-                    }
+
+                    TicTacTec.TA.Library.Core.Rsi(0, e.candleList.Count - 1, closeArr, optInTimePeriod, out a, out b, c);
 
                     if (model.Count == 0)
                     {
-
                         for (int i = 0; i < maxPoints; i++)
                         {
                             model.Add(new LineChartModel { DateTime = e.candleList[200 - maxPoints + i].getOpenTime(), Value = c[b - maxPoints + i] });
                         }
-
-
-                        //foreach (CandleIF cIF in e.candleList)
-                        //{
-                        //    model.Add(new LineChartModel { DateTime = cIF.getOpenTime(), Value = closeArr[i] });
-                        //}
                     }
                     else if (model.Count == maxPoints)
                     {
@@ -207,6 +200,39 @@ namespace Alerts.UI
                             model.RemoveAt(0);
                             model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = c[200 - 1 - optInTimePeriod] });
 
+                        }
+
+                        /*foreach (LineChartModel m in model)
+                        {
+                            System.Diagnostics.Debug.WriteLine("rs: " + m.Value + " " + m.DateTime);
+                        }*/
+                    }
+                }
+                else if(Indicator == Indicators.PRICE)
+                {
+                    model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
+                    double[] closeArr = list.Select(x => x.getClose()).ToArray();
+
+                    if (model.Count == 0)
+                    {
+                        for (int i = 0; i < maxPoints; i++)
+                        {
+                            model.Add(new LineChartModel { DateTime = list[list.Count - 1 - maxPoints + i].getOpenTime(), Value = list[list.Count - 1 - maxPoints + i].getClose() });
+                        }
+                    }
+                    else if (model.Count == maxPoints)
+                    {
+                        LineChartModel clast = model[model.Count - 1];
+                        CandleIF last = list[list.Count - 1];
+
+                        if (last.getOpenTime() == clast.DateTime)
+                        {
+                            model[model.Count - 1].Value = list[list.Count - 1].getClose();
+                        }
+                        else if (last.getOpenTime() > clast.DateTime)
+                        {
+                            model.RemoveAt(0);
+                            model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = list[list.Count - 1].getClose() });
 
                         }
 
@@ -235,7 +261,7 @@ namespace Alerts.UI
 
         public void CandlePull(Object o, CandlePullEventArgs e)
         {
-            if (e.Width == KlineWidth)
+            if (e.Width == CandleWidth)
             {
 
                 this.Dispatcher.Invoke(() =>
@@ -261,6 +287,15 @@ namespace Alerts.UI
                     AxisY.MinValue = 0;
 
                     SeriesCollection = new SeriesCollection(xyConfig);
+                    SeriesCollection.Add(new LineSeries { Values = new ChartValues<LineChartModel>() });
+                    break;
+                case Indicators.PRICE:
+                    var xyConfig1 = Mappers.Xy<Alerts.UI.Graphs.LineChartModel>()
+                        .X(xyModel => xyModel.DateTime)
+                        .Y(xyModel => xyModel.Value);
+
+
+                    SeriesCollection = new SeriesCollection(xyConfig1);
                     SeriesCollection.Add(new LineSeries { Values = new ChartValues<LineChartModel>() });
                     break;
             }

@@ -6,10 +6,10 @@
              xmlns:local="clr-namespace:Alerts.UI"
              xmlns:control = "clr-namespace:Alerts.UI" 
              mc:Ignorable="d" 
-             d:DesignHeight="331" d:DesignWidth="370" SizeChanged="UserControl_SizeChanged" Padding="5">
+             d:DesignHeight="331" d:DesignWidth="370" MinWidth="385" SizeChanged="UserControl_SizeChanged" Padding="5">
 
-    <Border BorderThickness="2" BorderBrush="#2b5797">
-        <Grid Margin="0" x:Name="grid">
+    <Border BorderThickness="2" BorderBrush="White">
+        <Grid Margin="0" x:Name="grid" Background="#2b5797">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>

@@ -80,6 +80,8 @@ namespace Alerts.Logic.ExchangeCode
 
                         IRestResponse response = client.Execute(request);
 
+                        System.Diagnostics.Debug.WriteLine("Response: " + response.ErrorMessage + " " + response.StatusCode + " " + response.IsSuccessful);
+
                         List<CandleBinance> list = JsonConvert.DeserializeObject<List<CandleBinance>>(response.Content);
 
                         if (list.Count == maxLimit || _width == CandleWidth.INIT)
@@ -151,21 +153,21 @@ namespace Alerts.Logic.ExchangeCode
                 candlePulled += parent.Header.initPull;
             }
 
-            if (childList.Find(x => x.KlineWidth == card.KlineWidth) == null)
+            if (childList.Find(x => x.CandleWidth == card.CandleWidth) == null)
             {
                 CancellationTokenSource source;
-                stopAsyncToken.TryGetValue(card.KlineWidth, out source);
+                stopAsyncToken.TryGetValue(card.CandleWidth, out source);
                 if (source == null)
                 {
                     source = new CancellationTokenSource();
 
-                    stopAsyncToken[card.KlineWidth] = source;
+                    stopAsyncToken[card.CandleWidth] = source;
 
-                    CandlePull(card.KlineWidth, source.Token);
+                    CandlePull(card.CandleWidth, source.Token);
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("DBG-ERROR 1: " + card.KlineWidth);
+                    System.Diagnostics.Debug.WriteLine("DBG-ERROR 1: " + card.CandleWidth);
                 }
             }
             else
@@ -175,7 +177,7 @@ namespace Alerts.Logic.ExchangeCode
 
             candlePulled += card.CandlePull;
             childList.Add(card);
-            childList.Sort((x, y) => x.KlineWidth.CompareTo(y.KlineWidth));
+            childList.Sort((x, y) => x.CandleWidth.CompareTo(y.CandleWidth));
 
         }
 
@@ -196,14 +198,14 @@ namespace Alerts.Logic.ExchangeCode
                 }
             }
 
-            if (childList.Find(x => x.KlineWidth == card.KlineWidth) == null)
+            if (childList.Find(x => x.CandleWidth == card.CandleWidth) == null)
             {
                 CancellationTokenSource source;
-                stopAsyncToken.TryGetValue(card.KlineWidth, out source);
+                stopAsyncToken.TryGetValue(card.CandleWidth, out source);
                 if (source != null)
                 {
                     List<CandleBinance> clist;
-                    dictCandle.TryGetValue(card.KlineWidth, out clist);
+                    dictCandle.TryGetValue(card.CandleWidth, out clist);
                     clist?.Clear();
 
                     source.Cancel();
@@ -211,10 +213,10 @@ namespace Alerts.Logic.ExchangeCode
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("DBG-ERROR 2: " + card.KlineWidth);
+                    System.Diagnostics.Debug.WriteLine("DBG-ERROR 2: " + card.CandleWidth);
                 }
             }
-            childList.Sort((x, y) => x.KlineWidth.CompareTo(y.KlineWidth));
+            childList.Sort((x, y) => x.CandleWidth.CompareTo(y.CandleWidth));
         }
 
         protected virtual void OnCandlePull(CandlePullEventArgs e)

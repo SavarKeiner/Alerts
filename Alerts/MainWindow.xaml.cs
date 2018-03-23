@@ -1,4 +1,5 @@
-﻿using Alerts.UI;
+﻿using Alerts.Logic.Enums;
+using Alerts.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace Alerts
             //listCellCoin.Children.Add(new AlertLayout { Exchange = Logic.Enums.Exchanges.Binance, Coin = Logic.Enums.Coins.ETH, Pair = Logic.Enums.Coins.BTC});
         }
 
-        public void addCellCoin()
+        public void addIndicator()
         {
 
         }
@@ -64,10 +65,50 @@ namespace Alerts
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine("shit: " + e.NewSize.Width + " " + sideMenu.ActualWidth);
+            System.Diagnostics.Debug.WriteLine("shit: " + e.NewSize.Width + " " + sideMenu.ActualWidth + " " + listCellCoin.ActualWidth + " " + Scroll.ActualWidth);
 
-            listCellCoin.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
+            Scroll.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
+            //listCellCoin.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
             reSize();
+        }
+
+        internal void addIndicator(Exchanges selectedExchange, Coins selectedCoin, Coins selectedPairing, CandleWidth selectedWidth, Indicators selectedIndicator, IndicatorConditions selectedCondition, double value)
+        {
+            foreach(AlertLayout l in listCellCoin.Children) //in every current layout
+            {
+                if(l.Coin == selectedCoin && l.Pair == selectedPairing && l.Exchange == selectedExchange)// if layout exists with params
+                {
+                    foreach(AlertCard c in l.CardGrid.Children) //search for card with same indicator exists
+                    {
+                        if (c.Indicator == selectedIndicator && c.CandleWidth == selectedWidth) //if card with same indicator and candle width exists
+                        {
+                            c.addCondition(selectedCondition, value); //just needed to add condition, else it is a new card
+                            return;
+                        }
+                    }
+                    //indicator was not found in card list, need to create new one
+                    AlertCard _card = new AlertCard(selectedWidth, selectedExchange, selectedCoin, selectedPairing, selectedIndicator);
+                    _card.addCondition(selectedCondition, value);
+                    l.addTo(_card);
+                    return;
+                }
+
+
+            }
+
+            AlertLayout alert = new AlertLayout(selectedExchange, selectedCoin, selectedPairing);
+            AlertCard card = new AlertCard(selectedWidth, selectedExchange, selectedCoin, selectedPairing, selectedIndicator);
+            card.addCondition(selectedCondition, value);
+            alert.addTo(card);
+            listCellCoin.Children.Add(alert);
+            reSize();
+        }
+
+        private void mW_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            //System.Diagnostics.Debug.WriteLine("shit1: " + e.NewSize.Width);
+            //Scroll.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
+            //reSize();
         }
     }
 }

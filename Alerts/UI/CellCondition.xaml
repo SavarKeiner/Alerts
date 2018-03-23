@@ -13,7 +13,7 @@
     </UserControl.Resources>
 
 
-    <DockPanel Background="#707070">
+    <DockPanel Background="Transparent">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0">
             <Label x:Name="labelCondition" Content="BELOW" FontFamily="Courier" Foreground="WhiteSmoke" FontWeight="SemiBold"></Label>
             <Label x:Name="labelConditionValue" Content="30" FontFamily="Courier" Foreground="WhiteSmoke" FontWeight="SemiBold"></Label>
