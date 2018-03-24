@@ -147,8 +147,6 @@ namespace Alerts.Logic.ExchangeCode
                 CancellationTokenSource source = new CancellationTokenSource();
 
                 stopAsyncToken[CandleWidth.INIT] = source;
-                parent.Header.Symbol = card.Coin + card.Pair.ToString();
-                parent.Header.Exchange = card.Exchange;
                 CandlePull(CandleWidth.INIT, source.Token);
                 candlePulled += parent.Header.initPull;
             }
@@ -183,7 +181,10 @@ namespace Alerts.Logic.ExchangeCode
 
         public void remove(AlertCard card, List<AlertCard> childList)
         {
+            System.Diagnostics.Debug.WriteLine("DBG_REMOVE");
+
             candlePulled -= card.CandlePull;
+
             childList.Remove(card);
 
             if (childList.Count == 0)

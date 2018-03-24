@@ -216,6 +216,9 @@ namespace Alerts.UI
 
                 IRestResponse response = client.Execute(request);
 
+
+                System.Diagnostics.Debug.WriteLine("Response: " + response.ErrorMessage + " " + response.StatusCode + " " + response.IsSuccessful);
+
                 try
                 {
                     JToken jt = JToken.Parse(response.Content).SelectToken("symbols");
@@ -291,7 +294,7 @@ namespace Alerts.UI
             selectedIndicator = Indicators.PRICE;
             selectedCondition = IndicatorConditions.CROSS;
             selectedWidth = CandleWidth.m5;
-    }
+        }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

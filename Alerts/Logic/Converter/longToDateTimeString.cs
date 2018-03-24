@@ -12,7 +12,19 @@ namespace Alerts.Logic.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (new DateTime(1970, 1, 1)).AddMilliseconds((long)value).ToString("yyyy-MM-dd HH:mm");
+            string v = "";
+
+            try
+            {
+                v = (new DateTime(1970, 1, 1)).AddMilliseconds((long)value).ToString("yyyy-MM-dd HH:mm");
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("EXCP: " + e.Message + " " + e.StackTrace);
+                throw;
+            }
+
+            return v;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -46,27 +46,13 @@ namespace Alerts.UI
             }
         }
 
-        public CellCondition()
-        {
-            InitializeComponent();
-        }
-
         public CellCondition(AlertCard card, IndicatorConditions indicatorCondition, double value)
         {
             InitializeComponent();
+            btnl.Visibility = Visibility.Collapsed;
             this.indicatorCondition = indicatorCondition;
             this.value = value;
             this.card = card;
-        }
-
-        public CellCondition(CellIndicator cellIndicator, CandleWidth candlestickWidth, IndicatorConditions indicatorCondition, double value)
-        {
-            InitializeComponent();
-            this.cellIndicator = cellIndicator;
-            this.candlestickWidth = candlestickWidth;
-            this.indicatorCondition = indicatorCondition;
-            this.value = value;
-
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
@@ -76,9 +62,14 @@ namespace Alerts.UI
             card.listCondition.Children.Remove(this);
         }
 
-        private void btnMute_Click(object sender, RoutedEventArgs e)
+        private void DockPanel_MouseEnter(object sender, MouseEventArgs e)
         {
+            btnl.Visibility = Visibility.Visible;
+        }
 
+        private void DockPanel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnl.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -7,10 +7,9 @@
              xmlns:control = "clr-namespace:Alerts.UI"
              mc:Ignorable="d" 
              >
-    
-    
+
+
     <StackPanel>
-        <control:CellHeader x:Name="indicatorHeader"></control:CellHeader>
         <StackPanel x:Name="conditionList">
             
         </StackPanel>

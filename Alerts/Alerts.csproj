@@ -153,9 +153,6 @@
     <Compile Include="UI\CellCondition.xaml.cs">
       <DependentUpon>CellCondition.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\CellHeader.xaml.cs">
-      <DependentUpon>CellHeader.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\CellIndicator.xaml.cs">
       <DependentUpon>CellIndicator.xaml</DependentUpon>
     </Compile>
@@ -208,10 +205,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\CellCondition.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\CellHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -354,6 +347,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Icons\CoinIcons\XRP.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\ButtonIcons\ic_close_white_24px.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

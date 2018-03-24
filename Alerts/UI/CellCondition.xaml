@@ -5,22 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Alerts.UI"
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
-             mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="110">
+             mc:Ignorable="d" d:DesignWidth="110">
 
     <UserControl.Resources>
         <Image x:Key="remove" Source="{svgc:SvgImage Source=/UI/icons/ButtonIcons/ic_remove_white_24px.svg}"></Image>
     </UserControl.Resources>
 
+    <WrapPanel Orientation="Horizontal" Background="Transparent" MouseEnter="DockPanel_MouseEnter" MouseLeave="DockPanel_MouseLeave" Height="20">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <Label x:Name="labelCondition" Content="BELOW" FontFamily="Courier" Foreground="WhiteSmoke" FontWeight="SemiBold" Padding="2,2,2,0"></Label>
+            <Label x:Name="labelConditionValue" Content="30" FontFamily="Courier" Foreground="WhiteSmoke" FontWeight="SemiBold" Padding="2,2,5,0"></Label>
 
-    <DockPanel Background="Transparent">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0">
-            <Label x:Name="labelCondition" Content="BELOW" FontFamily="Courier" Foreground="WhiteSmoke" FontWeight="SemiBold"></Label>
-            <Label x:Name="labelConditionValue" Content="30" FontFamily="Courier" Foreground="WhiteSmoke" FontWeight="SemiBold"></Label>
         </StackPanel>
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,5,5">
-            <Button x:Name="btnRemove" Content="{StaticResource remove}" Padding="3"  Width="20" Height="20" FontFamily="Courier" FontWeight="Bold" Foreground="WhiteSmoke" Background="#505050" Click="btnRemove_Click"></Button>
+        <StackPanel x:Name="btnl" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="btnRemove" Visibility="Visible" Content="{StaticResource remove}" VerticalAlignment="Center" Width="12" Height="12" FontFamily="Courier" FontWeight="Bold" Foreground="White" Background="#404040" Click="btnRemove_Click" ></Button>
         </StackPanel>
-    </DockPanel>
+    </WrapPanel>
 </UserControl>

@@ -32,7 +32,7 @@ namespace Alerts.UI.Dialogs
             InitializeComponent();
         }
 
-        public CellIndicatorAddPopup(CellHeader header, CandleWidth candlestickWidth, Indicators indicator)
+        public CellIndicatorAddPopup(CandleWidth candlestickWidth, Indicators indicator)
         {
             InitializeComponent();
             this.KlinesWidth = candlestickWidth;

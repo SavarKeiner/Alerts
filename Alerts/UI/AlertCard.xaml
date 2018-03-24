@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Alerts.UI"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-             xmlns:control = "clr-namespace:Alerts.UI.Graphs" 
+             xmlns:control = "clr-namespace:Alerts.UI.Graphs"
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="370" Background="#1D2850" Width="370" Height="300" >
     <Border BorderThickness="1,1,0,0" BorderBrush="#2b5797">
@@ -45,8 +46,22 @@
             <Label x:Name="indicatorChange" Content="0.00000000" FontSize="14" Foreground="White" FontFamily="Courier" FontWeight="SemiBold"></Label>
         </StackPanel>
 
-        <Button Content="cls" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="11" Margin="0,5,5,0"></Button>
-        <Label x:Name="klineWidth" FontSize="14" Foreground="White" FontFamily="Courier" Content="5m" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"></Label>
+            <Button x:Name="btnRemoveCard" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Width="20" Height="20" Grid.Column="12" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="Button_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                    </ControlTemplate>
+                </Button.Template>
+                <Grid>
+                    <Border BorderThickness="1" BorderBrush="White" Visibility="Hidden">
+                    </Border>
+                    <StackPanel Margin="0,3,0,0">
+                        <svgc:SvgViewbox Source="/UI/icons/ButtonIcons/ic_close_white_24px.svg" Width="15" Height="15"></svgc:SvgViewbox>
+                    </StackPanel>
+                </Grid>
+            </Button>
+        
+            <Label x:Name="klineWidth" FontSize="14" Foreground="White" FontFamily="Courier" Content="5m" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"></Label>
 
         <ScrollViewer Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="10" Grid.RowSpan="3" Margin="0,5,5,0"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" BorderBrush="White" BorderThickness="1">
             <WrapPanel x:Name="listCondition" Orientation="Vertical">

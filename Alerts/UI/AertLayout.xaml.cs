@@ -47,8 +47,11 @@ namespace Alerts.UI
             this.Coin = Coin;
             this.Pair = Pair;
 
+            Header.alert = this;
+            Header.Exchange = Exchange;
+            Header.Symbol = Coin.ToString() + Pair.ToString();
 
-            if(Exchange == Exchanges.Binance)
+            if (Exchange == Exchanges.Binance)
             {
                 exchangeIF = new Binance(this, Coin, Pair);
             }
@@ -60,23 +63,46 @@ namespace Alerts.UI
             card.Pair = Coins.BTC;
             this.addTo(card);*/
 
+        }
 
-            Header.btnAdd.Click += AddClick;
+        public void add(CandleWidth selectedWidth, Indicators selectedIndicator, IndicatorConditions selectedCondition, double value)
+        {
+
+            foreach (AlertCard c in CardGrid.Children) //search for card with same indicator exists
+            {
+                if (c.Indicator == selectedIndicator && c.CandleWidth == selectedWidth) //if card with same indicator and candle width exists
+                {
+                    c.addCondition(selectedCondition, value); //just needed to add condition, else it is a new card
+                    return;
+                }
+            }
+
+            AlertCard card = new AlertCard(this, selectedWidth, Exchange, Coin, Pair, selectedIndicator);
+            card.addCondition(selectedCondition, value);
+            addTo(card);
+            SetPosition();
         }
 
         public void addTo(AlertCard card)
         {
             exchangeIF.add(card, childList);
-
             CardGrid.Children.Add(card);
             SetPosition();
         }
 
         public void removeTo(AlertCard card)
         {
-            exchangeIF.add(card, childList);
-
+            exchangeIF.remove(card, childList);
             CardGrid.Children.Remove(card);
+
+            if(childList.Count == 0)
+            {
+                Application curApp = Application.Current;
+                MainWindow mainWindow = (MainWindow)curApp.MainWindow;
+
+                mainWindow.listCellCoin.Children.Remove(this);
+            }
+
             SetPosition();
         }
 
@@ -96,7 +122,7 @@ namespace Alerts.UI
             for (int i = 0; i < childList.Count; i++)
             {
                 y = (int)Math.Floor(i / (double)maxXCards);
-                double y1 =  y * 300.0d;
+                double y1 = y * 300.0d;
 
                 if (x >= maxXCards)
                     x = 0;
@@ -109,24 +135,6 @@ namespace Alerts.UI
 
             CardGrid.Height = 300 + y * 300;
             //System.Diagnostics.Debug.WriteLine("111: " + this.ActualHeight + " " + this.ActualWidth + " " + childList[0].ActualHeight + " " + childList[0].ActualWidth + " " + childList[0].griddd.ActualHeight + " " + this.grid.ActualHeight + " " + CardGrid.ActualHeight);
-        }
-
-        private void AddClick(Object o, RoutedEventArgs e)
-        {
-            CellGridAddPopup dialog = new CellGridAddPopup();
-            dialog.Exchange = Exchange;
-            dialog.Coin = Coin;
-
-
-            dialog.ShowDialog();
-
-            if (dialog.DialogResult.HasValue && dialog.DialogResult == true)
-            {
-                AlertCard card = new AlertCard(dialog.KlinesWidth, Exchange, Coin, Pair, dialog.Indicator);
-
-                card.addCondition(dialog.Condition, dialog.ConditionValue);
-                addTo(card);
-            }
         }
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)

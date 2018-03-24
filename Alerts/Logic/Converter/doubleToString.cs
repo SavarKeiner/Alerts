@@ -12,7 +12,19 @@ namespace Alerts.Logic.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((double)value).ToString("0.00", CultureInfo.InvariantCulture);
+            string v = "";
+
+            try
+            {
+                v = ((double)value).ToString("0.00000000", CultureInfo.InvariantCulture);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("EXCP: " + e.Message + " " + e.StackTrace);
+                throw;
+            }
+
+            return ((double)value).ToString("0.00000000", CultureInfo.InvariantCulture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

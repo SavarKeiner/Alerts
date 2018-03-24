@@ -65,14 +65,14 @@ namespace Alerts
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("shit: " + e.NewSize.Width + " " + sideMenu.ActualWidth + " " + listCellCoin.ActualWidth + " " + Scroll.ActualWidth);
+            System.Diagnostics.Debug.WriteLine("MainSize: " + e.NewSize.Width + " " + sideMenu.ActualWidth + " " + listCellCoin.ActualWidth + " " + Scroll.ActualWidth);
 
             Scroll.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
             //listCellCoin.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
             reSize();
         }
 
-        internal void addIndicator(Exchanges selectedExchange, Coins selectedCoin, Coins selectedPairing, CandleWidth selectedWidth, Indicators selectedIndicator, IndicatorConditions selectedCondition, double value)
+        public void addIndicator(Exchanges selectedExchange, Coins selectedCoin, Coins selectedPairing, CandleWidth selectedWidth, Indicators selectedIndicator, IndicatorConditions selectedCondition, double value)
         {
             foreach(AlertLayout l in listCellCoin.Children) //in every current layout
             {
@@ -87,7 +87,7 @@ namespace Alerts
                         }
                     }
                     //indicator was not found in card list, need to create new one
-                    AlertCard _card = new AlertCard(selectedWidth, selectedExchange, selectedCoin, selectedPairing, selectedIndicator);
+                    AlertCard _card = new AlertCard(l, selectedWidth, selectedExchange, selectedCoin, selectedPairing, selectedIndicator);
                     _card.addCondition(selectedCondition, value);
                     l.addTo(_card);
                     return;
@@ -97,7 +97,7 @@ namespace Alerts
             }
 
             AlertLayout alert = new AlertLayout(selectedExchange, selectedCoin, selectedPairing);
-            AlertCard card = new AlertCard(selectedWidth, selectedExchange, selectedCoin, selectedPairing, selectedIndicator);
+            AlertCard card = new AlertCard(alert, selectedWidth, selectedExchange, selectedCoin, selectedPairing, selectedIndicator);
             card.addCondition(selectedCondition, value);
             alert.addTo(card);
             listCellCoin.Children.Add(alert);

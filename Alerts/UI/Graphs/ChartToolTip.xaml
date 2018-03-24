@@ -14,25 +14,24 @@
         <conv:longToDateTimeString x:Key="longToDateTimeString" />
         <conv:doubleToString x:Key="doubleToString" />
     </UserControl.Resources>
-    
+
     <ItemsControl ItemsSource="{Binding Data.Points}">
         <ItemsControl.ItemTemplate>
             <DataTemplate DataType="{x:Type wpf:DataPointViewModel}">
-                <Border BorderThickness="2" CornerRadius="2" BorderBrush="Black">
-                    <Grid Margin="0" Background="White">
-                    <Grid.ColumnDefinitions>
+                <Border BorderThickness="2" CornerRadius="2" BorderBrush="#2b5797">
+                    <Grid Margin="0" Background="#CC2b5797">
+                        <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="0" Content="{Binding ChartPoint.Instance.(control:LineChartModel.DateTime), Converter={StaticResource longToDateTimeString}}"
-                               Margin="0 0 0 0" VerticalAlignment="Center" Foreground="Black" FontFamily="Arial" FontSize="14" FontWeight="Bold"/>
+                               Margin="0 0 0 0" VerticalAlignment="Center" Foreground="White" FontFamily="Arial" FontSize="14" FontWeight="Bold"/>
                         <Label
                             Grid.Column="1" Content="{Binding ChartPoint.Instance.(local:LineChartModel.Value), Converter={StaticResource doubleToString}}" 
-                               Margin="0 0 0 0" VerticalAlignment="Center" Foreground="Black" FontFamily="Arial" FontSize="14" FontWeight="Bold"/>
-                </Grid>
+                               Margin="0 0 0 0" VerticalAlignment="Center" Foreground="White" FontFamily="Arial" FontSize="14" FontWeight="Bold"/>
+                    </Grid>
                 </Border>
-
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>

@@ -130,6 +130,7 @@ namespace Alerts.UI
             }
 
         }
+        private AlertLayout alert { get; set; }
 
         public SeriesCollection SeriesCollection { get; set; }
         public Func<double, string> FormatterX { get; set; }
@@ -138,7 +139,7 @@ namespace Alerts.UI
         public long AxisStep { get; set; }
         public double AxisUnit { get; set; }
 
-        public AlertCard(CandleWidth CandleWidth, Exchanges Exchange, Coins Coin, Coins Pair, Indicators Indicator)
+        public AlertCard(AlertLayout alert, CandleWidth CandleWidth, Exchanges Exchange, Coins Coin, Coins Pair, Indicators Indicator)
         {
             InitializeComponent();
 
@@ -147,6 +148,12 @@ namespace Alerts.UI
             this.Coin = Coin;
             this.Pair = Pair;
             this.Indicator = Indicator;
+            this.alert = alert;
+
+            btnRemoveCard.Click += (o, e) =>
+            {
+                alert.removeTo(this);
+            };
 
             //15212094872460000000
             FormatterX = value => (new DateTime(1970, 1, 1)).AddMilliseconds((long)value).ToString("HH:mm");
@@ -207,6 +214,9 @@ namespace Alerts.UI
                             System.Diagnostics.Debug.WriteLine("rs: " + m.Value + " " + m.DateTime);
                         }*/
                     }
+
+                    Value = c[200 - 1 - optInTimePeriod];
+                    ValueChange = c[200 - 1 - optInTimePeriod] - c[200 - 2 - optInTimePeriod];
                 }
                 else if(Indicator == Indicators.PRICE)
                 {
@@ -241,6 +251,8 @@ namespace Alerts.UI
                             System.Diagnostics.Debug.WriteLine("rs: " + m.Value + " " + m.DateTime);
                         }*/
                     }
+                    Value = e.candleList[e.candleList.Count - 1].getClose();
+                    ValueChange = e.candleList[e.candleList.Count - 1].getClose() - e.candleList[e.candleList.Count - 2].getClose();
                 }
 
 
@@ -267,8 +279,6 @@ namespace Alerts.UI
                 this.Dispatcher.Invoke(() =>
                 {
                     SetGraphValues(e);
-                    Value = e.candleList[e.candleList.Count - 1].getClose();
-                    ValueChange = e.candleList[e.candleList.Count - 1].getClose() - e.candleList[e.candleList.Count - 2].getClose();
                 });
 
             }
@@ -302,6 +312,21 @@ namespace Alerts.UI
         }
 
         private void Chart_DataHover(object sender, ChartPoint chartPoint)
+        {
+
+        }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ((Grid)((Button)sender).Content).Children[0].Visibility = Visibility.Visible;
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ((Grid)((Button)sender).Content).Children[0].Visibility = Visibility.Hidden;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
 
         }
