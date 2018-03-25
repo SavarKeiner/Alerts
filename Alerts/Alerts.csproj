@@ -351,5 +351,51 @@
   <ItemGroup>
     <Resource Include="UI\Icons\ButtonIcons\ic_close_white_24px.svg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\ADX.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\AION.svg" />
+    <Resource Include="UI\Icons\CoinIcons\BAT.svg" />
+    <Resource Include="UI\Icons\CoinIcons\BCC.svg" />
+    <Resource Include="UI\Icons\CoinIcons\AST.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\WhiteCircle.svg" />
+    <Resource Include="UI\Icons\CoinIcons\BNT.svg" />
+    <Resource Include="UI\Icons\CoinIcons\BTG.svg" />
+    <Resource Include="UI\Icons\CoinIcons\BTS.svg" />
+    <Resource Include="UI\Icons\CoinIcons\DASH.svg" />
+    <Resource Include="UI\Icons\CoinIcons\DGD.svg" />
+    <Resource Include="UI\Icons\CoinIcons\EDO.svg" />
+    <Resource Include="UI\Icons\CoinIcons\EOS.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ETC.svg" />
+    <Resource Include="UI\Icons\CoinIcons\FUEL.svg" />
+    <Resource Include="UI\Icons\CoinIcons\FUN.svg" />
+    <Resource Include="UI\Icons\CoinIcons\GVT.svg" />
+    <Resource Include="UI\Icons\CoinIcons\GXS.svg" />
+    <Resource Include="UI\Icons\CoinIcons\KMD.svg" />
+    <Resource Include="UI\Icons\CoinIcons\LINK.svg" />
+    <Resource Include="UI\Icons\CoinIcons\LRC.svg" />
+    <Resource Include="UI\Icons\CoinIcons\MDA.svg" />
+    <Resource Include="UI\Icons\CoinIcons\MOD.svg" />
+    <Resource Include="UI\Icons\CoinIcons\MTL.svg" />
+    <Resource Include="UI\Icons\CoinIcons\NANO.svg" />
+    <Resource Include="UI\Icons\CoinIcons\NEBL.svg" />
+    <Resource Include="UI\Icons\CoinIcons\OMG.svg" />
+    <Resource Include="UI\Icons\CoinIcons\PIVX.svg" />
+    <Resource Include="UI\Icons\CoinIcons\PPT.svg" />
+    <Resource Include="UI\Icons\CoinIcons\QTUM.svg" />
+    <Resource Include="UI\Icons\CoinIcons\RDN.svg" />
+    <Resource Include="UI\Icons\CoinIcons\SNM.svg" />
+    <Resource Include="UI\Icons\CoinIcons\SNT.svg" />
+    <Resource Include="UI\Icons\CoinIcons\STEEM.svg" />
+    <Resource Include="UI\Icons\CoinIcons\STORJ.svg" />
+    <Resource Include="UI\Icons\CoinIcons\VIBE.svg" />
+    <Resource Include="UI\Icons\CoinIcons\XLM.svg" />
+    <Resource Include="UI\Icons\CoinIcons\XMR.svg" />
+    <Resource Include="UI\Icons\CoinIcons\XVG.svg" />
+    <Resource Include="UI\Icons\CoinIcons\XZC.svg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

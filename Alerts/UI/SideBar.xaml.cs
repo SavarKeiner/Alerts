@@ -134,19 +134,21 @@ namespace Alerts.UI
                 coineSourceBinance.Clear();
                 foreach (Coins c in lc)
                 {
+                    System.Diagnostics.Debug.WriteLine("DBG-EX: " + c);
                     try
                     {
-                        System.Diagnostics.Debug.WriteLine("DBG-EX: " + c);
-
                         ImageTextItem item = new ImageTextItem();
                         item.image.Source = new Uri("/UI/Icons/CoinIcons/" + c + ".svg", UriKind.Relative);
                         item.text.Content = c;
-
                         coineSourceBinance.Add(item);
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine("DBG-EX: " + ex.Message + " " + ex.StackTrace);
+                        ImageTextItem item = new ImageTextItem();
+                        item.image.Source = new Uri("/UI/Icons/CoinIcons/WhiteCircle.svg", UriKind.Relative);
+                        item.text.Content = c;
+                        coineSourceBinance.Add(item);
+                        System.Diagnostics.Debug.WriteLine("DBG-IMAGE-EX: " + ex.Message);
                     }
                 }
                 listCoins.ItemsSource = null;
@@ -263,7 +265,8 @@ namespace Alerts.UI
                         }
 
                     }
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     System.Diagnostics.Debug.WriteLine("DBG-EXCEPTION!!!!: " + e.Message + " " + e.StackTrace);
                     //do nothing for now
@@ -274,11 +277,20 @@ namespace Alerts.UI
 
             foreach (KeyValuePair<Coins, List<Coins>> entry in paringCoinDict)
             {
-                ImageTextItem item = new ImageTextItem();
-                item.image.Source = new Uri("/UI/Icons/CoinIcons/" + entry.Key + ".svg", UriKind.Relative);
-                item.text.Content = entry.Key;
-
-                pairingSourceBinance.Add(item);
+                try
+                {
+                    ImageTextItem item = new ImageTextItem();
+                    item.image.Source = new Uri("/UI/Icons/CoinIcons/" + entry.Key + ".svg", UriKind.Relative);
+                    item.text.Content = entry.Key;
+                    pairingSourceBinance.Add(item);
+                }
+                catch (Exception e)
+                {
+                    ImageTextItem item = new ImageTextItem();
+                    item.image.Source = new Uri("/UI/Icons/CoinIcons/WhiteCircle.svg", UriKind.Relative);
+                    item.text.Content = entry.Key;
+                    pairingSourceBinance.Add(item);
+                }
             }
             listPairing.ItemsSource = pairingSourceBinance;
         }
@@ -361,7 +373,7 @@ namespace Alerts.UI
 
         private void AddIndicatorBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(selectedExchange != Exchanges.INIT && selectedPairing != Coins.INIT && selectedCoin != Coins.INIT && selectedIndicator != Indicators.INIT 
+            if (selectedExchange != Exchanges.INIT && selectedPairing != Coins.INIT && selectedCoin != Coins.INIT && selectedIndicator != Indicators.INIT
                 && selectedCondition != IndicatorConditions.INIT && selectedWidth != CandleWidth.INIT)
             {
                 Application curApp = Application.Current;

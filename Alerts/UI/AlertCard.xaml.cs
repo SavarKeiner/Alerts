@@ -180,7 +180,7 @@ namespace Alerts.UI
                         {
                             //alert
                             condition.lastSeenOpenTime = openTime;
-                            condition.showNotification(Coin.ToString() + Pair.ToString() + " " + Exchange + " " + Indicator + " " + condition.indicatorCondition + " " + condition.value.ToString("0.00########"));
+                            condition.showNotification(Coin.ToString() + Pair.ToString() + " " + Exchange + " " + Indicator + " " + App.candleStickWidthToString(CandleWidth) + " " + condition.indicatorCondition + " " + condition.value.ToString("0.00########"));
                         }
                         break;
                     case IndicatorConditions.BELOW:
@@ -188,7 +188,7 @@ namespace Alerts.UI
                         {
                             //alert
                             condition.lastSeenOpenTime = openTime;
-                            condition.showNotification(Coin.ToString() + Pair.ToString() + " " + Exchange + " " + Indicator + " " + condition.indicatorCondition + " " + condition.value.ToString("0.00########"));
+                            condition.showNotification(Coin.ToString() + Pair.ToString() + " " + Exchange + " " + Indicator + " " + App.candleStickWidthToString(CandleWidth) + " " + condition.indicatorCondition + " " + condition.value.ToString("0.00########"));
                         }
                         break;
                     case IndicatorConditions.CROSS:
@@ -196,13 +196,13 @@ namespace Alerts.UI
                         {
                             //alert
                             condition.lastSeenOpenTime = openTime;
-                            condition.showNotification(Coin.ToString() + Pair.ToString() + " " + Exchange + " " + Indicator + " " + condition.indicatorCondition + " " + condition.value.ToString("0.00########"));
+                            condition.showNotification(Coin.ToString() + Pair.ToString() + " " + Exchange + " " + Indicator + " " + App.candleStickWidthToString(CandleWidth) + " " + condition.indicatorCondition + " " + condition.value.ToString("0.00########"));
                         }
                         else if (oldValue <= condition.value && newValue >= condition.value)
                         {
                             //alert
                             condition.lastSeenOpenTime = openTime;
-                            condition.showNotification(Coin.ToString() + Pair.ToString() + " " + Exchange + " " + Indicator + " " + condition.indicatorCondition + " " + condition.value.ToString("0.00########"));
+                            condition.showNotification(Coin.ToString() + Pair.ToString() + " " + Exchange + " " + Indicator + " " + App.candleStickWidthToString(CandleWidth) + " " + condition.indicatorCondition + " " + condition.value.ToString("0.00########"));
                         }
                         break;
                     case IndicatorConditions.CHANGE:
