@@ -11,10 +11,10 @@
         <Image x:Key="remove" Source="{svgc:SvgImage Source=/UI/icons/ButtonIcons/ic_remove_white_24px.svg}"></Image>
     </UserControl.Resources>
 
-    <WrapPanel Orientation="Horizontal" Background="Transparent" MouseEnter="DockPanel_MouseEnter" MouseLeave="DockPanel_MouseLeave" Height="20">
+    <WrapPanel Orientation="Horizontal" Background="Transparent" MouseEnter="DockPanel_MouseEnter" MouseLeave="DockPanel_MouseLeave" >
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-            <Label x:Name="labelCondition" Content="BELOW" FontFamily="Courier" Foreground="WhiteSmoke" FontWeight="SemiBold" Padding="2,2,2,0"></Label>
-            <Label x:Name="labelConditionValue" Content="30" FontFamily="Courier" Foreground="WhiteSmoke" FontWeight="SemiBold" Padding="2,2,5,0"></Label>
+            <Label x:Name="labelCondition" Content="BELOW" FontFamily="Courier" Foreground="White" FontWeight="SemiBold" Padding="2,2,2,0"></Label>
+            <Label x:Name="labelConditionValue" Content="30" FontFamily="Courier" Foreground="White" FontWeight="SemiBold" Padding="2,2,5,0"></Label>
 
         </StackPanel>
         <StackPanel x:Name="btnl" VerticalAlignment="Center" HorizontalAlignment="Center">

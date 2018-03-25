@@ -10,6 +10,6 @@ namespace Alerts.Logic.Enums
     {
         //INIT, VOLUME, PRICE, MACD, KDJ, RSI, DMI, OBV, MTM, EMA, VWAP, TRIX, StochRSI, EMV, WR, BOLL, SAR, CCI, MA
 
-        INIT, PRICE, RSI
+        INIT, PRICE, RSI, VOLUME
     }
 }

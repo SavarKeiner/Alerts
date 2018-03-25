@@ -204,6 +204,10 @@
             </WrapPanel>
         </ScrollViewer>
 
+        <Grid x:Name="notificationArea" Canvas.Left="100" Canvas.Top="650" Width="1172" Height="50">
+            
+        </Grid>
+
         <control:SideBar x:Name="sideBar" Canvas.Left="100" Canvas.Top="0" Height="{Binding ActualHeight, ElementName=mW}"></control:SideBar>
         <control:SideMenu x:Name="sideMenu" Canvas.Top="0" Canvas.Left="0" Height="{Binding ActualHeight, ElementName=mW}"></control:SideMenu>
     </Canvas>

@@ -29,6 +29,8 @@ namespace Alerts.Logic.ExchangeCode
 
         private AlertLayout parent;
 
+        public int sleepTime = 1000;
+
         public Binance(AlertLayout parent, Coins Coin, Coins Pair)
         {
             this.parent = parent;
@@ -56,6 +58,7 @@ namespace Alerts.Logic.ExchangeCode
                     List<CandleBinance> clist;
                     int limit = maxLimit;
                     dictCandle.TryGetValue(_width, out clist);
+                    bool newList = false;
 
                     if (width == CandleWidth.INIT)
                     {
@@ -76,11 +79,32 @@ namespace Alerts.Logic.ExchangeCode
                             {
                                 request = new RestRequest("/klines?symbol=" + Coin + Pair + "&interval=" + App.candleStickWidthToString(width) + "&limit=" + limit);
                             }
+                        } else if(clist.Count == 0)
+                        {
+                            request = new RestRequest("/klines?symbol=" + Coin + Pair + "&interval=" + App.candleStickWidthToString(width) + "&limit=" + limit);
                         }
 
                         IRestResponse response = client.Execute(request);
 
-                        System.Diagnostics.Debug.WriteLine("Response: " + response.ErrorMessage + " " + response.StatusCode + " " + response.IsSuccessful);
+                        System.Diagnostics.Debug.WriteLine("Response Candle: " + response.ErrorMessage + " " + response.StatusCode + " " + response.IsSuccessful + " " + response.StatusDescription + " " + response.ErrorMessage + " " +response.ResponseStatus);
+
+                        if((int)response.StatusCode == 429)
+                        {
+                            sleepTime = 3000;
+                        }
+
+                        if (response.IsSuccessful == false)
+                        {
+                            if(clist.Count > 0)
+                            {
+                                clist.Clear();
+                                limit = maxLimit;
+                                newList = true;
+                            }
+                            Thread.Sleep(5000);
+                            continue;
+                        }
+
 
                         List<CandleBinance> list = JsonConvert.DeserializeObject<List<CandleBinance>>(response.Content);
 
@@ -117,9 +141,12 @@ namespace Alerts.Logic.ExchangeCode
                         CandlePullEventArgs args = new CandlePullEventArgs();
                         args.Width = _width;
                         args.candleList = clist.ToList<CandleIF>();
+                        args.newList = newList;
                         OnCandlePull(args);
 
-                        Thread.Sleep(1000);
+
+                        newList = false;
+                        Thread.Sleep(sleepTime);
                     }
                 } catch (Exception e)
                 {
@@ -148,14 +175,15 @@ namespace Alerts.Logic.ExchangeCode
 
                 stopAsyncToken[CandleWidth.INIT] = source;
                 CandlePull(CandleWidth.INIT, source.Token);
-                candlePulled += parent.Header.initPull;
+                //candlePulled += parent.Header.initPull;
+                parent.Header.PullData(Exchange, Coin, Pair);
             }
 
             if (childList.Find(x => x.CandleWidth == card.CandleWidth) == null)
             {
                 CancellationTokenSource source;
                 stopAsyncToken.TryGetValue(card.CandleWidth, out source);
-                if (source == null)
+                if (source == null || source.IsCancellationRequested)
                 {
                     source = new CancellationTokenSource();
 
@@ -189,7 +217,7 @@ namespace Alerts.Logic.ExchangeCode
 
             if (childList.Count == 0)
             {
-                candlePulled -= parent.Header.initPull;
+                //candlePulled -= parent.Header.initPull;
                 CancellationTokenSource source;
                 stopAsyncToken.TryGetValue(CandleWidth.INIT, out source);
                 if (source != null)
@@ -209,8 +237,8 @@ namespace Alerts.Logic.ExchangeCode
                     dictCandle.TryGetValue(card.CandleWidth, out clist);
                     clist?.Clear();
 
-                    source.Cancel();
-                    source.Dispose();
+                    source?.Cancel();
+                    source?.Dispose();
                 }
                 else
                 {

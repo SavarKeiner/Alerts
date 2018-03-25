@@ -19,6 +19,11 @@ namespace Alerts
             return (value < min) ? min : (value > max) ? max : value;
         }
 
+        public static double Clamp(double value, double min, double max)
+        {
+            return (value < min) ? min : (value > max) ? max : value;
+        }
+
         public static string candleStickWidthToString(CandleWidth width)
         {
             switch (width)

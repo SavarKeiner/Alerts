@@ -21,7 +21,6 @@ namespace Alerts.UI
     /// </summary>
     public partial class CellCondition : UserControl
     {
-        public CellIndicator cellIndicator;
         public AlertCard card;
         public CandleWidth candlestickWidth { get; set; }
 
@@ -42,9 +41,11 @@ namespace Alerts.UI
             set
             {
                 _value = value;
-                labelConditionValue.Content = value;
+                labelConditionValue.Content = value.ToString("0.00######");
             }
         }
+
+        public long lastSeenOpenTime { get; set; } = 0;
 
         public CellCondition(AlertCard card, IndicatorConditions indicatorCondition, double value)
         {
@@ -70,6 +71,27 @@ namespace Alerts.UI
         private void DockPanel_MouseLeave(object sender, MouseEventArgs e)
         {
             btnl.Visibility = Visibility.Collapsed;
+        }
+
+        public void showNotification(string str)
+        {
+
+            labelCondition.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00FF00"));
+            labelConditionValue.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00FF00"));
+
+            Application curApp = Application.Current;
+            MainWindow mainWindow = (MainWindow)curApp.MainWindow;
+
+            NotificationsPop pop = new NotificationsPop();
+            pop.messageLabel.Content = str;
+            pop.closeButton.Click += (o, e) =>
+            {
+                mainWindow.notificationArea.Children.Remove(pop);
+                labelCondition.Foreground = new SolidColorBrush(Colors.White);
+                labelConditionValue.Foreground = new SolidColorBrush(Colors.White);
+            };
+
+            mainWindow.notificationArea.Children.Add(pop);
         }
     }
 }

@@ -12,5 +12,6 @@ namespace Alerts.Logic.Events
     {
         public List<CandleIF> candleList;
         public CandleWidth Width { get; set; }
+        public bool newList { get; set; } = false;
     }
 }

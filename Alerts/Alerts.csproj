@@ -138,12 +138,12 @@
     <Compile Include="Logic\Enums\Exchanges.cs" />
     <Compile Include="Logic\Enums\IndicatorConditions.cs" />
     <Compile Include="Logic\Enums\Indicators.cs" />
-    <Compile Include="Logic\Events\CandlePulledEventArgs.cs" />
     <Compile Include="Logic\Events\CandlePullEventArgs.cs" />
     <Compile Include="Logic\ExchangeCode\Binance.cs" />
     <Compile Include="Logic\Interfaces\ExchangeIF.cs" />
     <Compile Include="Logic\Interfaces\CandleIF.cs" />
     <Compile Include="Logic\RESTObjects\CandleBinance.cs" />
+    <Compile Include="Logic\RESTObjects\TickerBinance.cs" />
     <Compile Include="UI\AertLayout.xaml.cs">
       <DependentUpon>AertLayout.xaml</DependentUpon>
     </Compile>
@@ -152,9 +152,6 @@
     </Compile>
     <Compile Include="UI\CellCondition.xaml.cs">
       <DependentUpon>CellCondition.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\CellIndicator.xaml.cs">
-      <DependentUpon>CellIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\CellCoinHeader.xaml.cs">
       <DependentUpon>CellCoinHeader.xaml</DependentUpon>
@@ -177,6 +174,9 @@
     <Compile Include="UI\Graphs\LineChartModel.cs" />
     <Compile Include="UI\ImageTextItem.xaml.cs">
       <DependentUpon>ImageTextItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\NotificationsPop.xaml.cs">
+      <DependentUpon>NotificationsPop.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SideBar.xaml.cs">
       <DependentUpon>SideBar.xaml</DependentUpon>
@@ -208,10 +208,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\CellIndicator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\CellCoinHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -237,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ImageTextItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\NotificationsPop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

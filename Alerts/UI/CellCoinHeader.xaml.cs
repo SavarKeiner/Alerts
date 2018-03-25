@@ -14,6 +14,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Alerts.Logic.Enums;
+using System.Threading;
+using RestSharp;
+using Newtonsoft.Json;
+using Alerts.Logic.RESTObjects;
+using System.Globalization;
 
 namespace Alerts.UI
 {
@@ -68,20 +73,73 @@ namespace Alerts.UI
         private CandleWidth selectedWidth { get; set; }
         private double ConditionValue { get; set; } = 0;
 
+        public CancellationTokenSource source;
+
         public CellCoinHeader()
         {
             InitializeComponent();
+            source = new CancellationTokenSource();
 
             AddIndicatorL.Visibility = Visibility.Collapsed;
         }
 
-        public void initPull(Object o, CandlePullEventArgs e)
+        public async void PullData(Exchanges Exchange, Coins Coin, Coins Pair)
         {
-            if (e.Width == Logic.Enums.CandleWidth.INIT)
+            try
             {
-                this.Dispatcher.Invoke(() => {
-                    labelPrice.Content = e.candleList[e.candleList.Count - 1].getClose().ToString("0.00000000");
+                await Task.Run(() =>
+                {
+                    RestClient client = null;
+                    RestRequest request = null;
+
+                    if(Exchange == Exchanges.Binance)
+                    {
+                        client = new RestClient("https://api.binance.com/api/v1");
+                        request = new RestRequest("/ticker/24hr?symbol=" + Coin + Pair);
+                    }
+
+                    while (true)
+                    {
+                        IRestResponse response = client.Execute(request);
+                        System.Diagnostics.Debug.WriteLine("Response Ticker: " + response.ErrorMessage + " " + response.StatusCode + " " + response.IsSuccessful + " " + response.StatusDescription + " " + response.ErrorMessage + " " + response.ResponseStatus);
+
+                        if (response.IsSuccessful == false)
+                        {
+                            Thread.Sleep(5000);
+                            continue;
+                        }
+
+                        if (Exchange == Exchanges.Binance)
+                        {
+                            TickerBinance ticker = JsonConvert.DeserializeObject<TickerBinance>(response.Content);
+
+                            ;
+                            this.Dispatcher.Invoke(() => {
+                                labelPrice.Content = double.Parse(ticker.lastPrice, CultureInfo.InvariantCulture).ToString("0.00000000");
+                                change24h.Content = "24h Change:";
+
+
+                                double per = double.Parse(ticker.priceChangePercent);
+                                change24hValue.Content = ticker.priceChangePercent + "%";
+
+                                if(per >= 0)
+                                    change24hValue.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00FF00"));
+                                else
+                                    change24hValue.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF0000"));
+
+                                high24.Content = "24h High: " + ticker.highPrice;
+                                low24.Content = "24h Low: " + ticker.lowPrice;
+                                volume24.Content = "24h Volume: " + ticker.volume;
+                            });
+                        }
+                        Thread.Sleep(1000);
+                    }
                 });
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("DBG EXCEPTION: " + e.Message +" " + e.StackTrace);
+                throw;
             }
         }
 

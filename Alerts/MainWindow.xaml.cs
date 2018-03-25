@@ -65,9 +65,13 @@ namespace Alerts
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("MainSize: " + e.NewSize.Width + " " + sideMenu.ActualWidth + " " + listCellCoin.ActualWidth + " " + Scroll.ActualWidth);
+            //System.Diagnostics.Debug.WriteLine("MainSize: " + e.NewSize.Width + " " + sideMenu.ActualWidth + " " + listCellCoin.ActualWidth + " " + Scroll.ActualWidth);
 
             Scroll.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
+
+            Canvas.SetTop(notificationArea, mW.ActualHeight - notificationArea.ActualHeight);
+            notificationArea.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
+
             //listCellCoin.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
             reSize();
         }
@@ -92,7 +96,6 @@ namespace Alerts
                     l.addTo(_card);
                     return;
                 }
-
 
             }
 
