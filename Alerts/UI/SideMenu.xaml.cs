@@ -44,6 +44,7 @@ namespace Alerts.UI
             {
                 mainWindow.sideBar.Visibility = Visibility.Visible;
                 mainWindow.sideBar.gridExchange.Visibility = Visibility.Visible;
+                mainWindow.darkener.Visibility = Visibility.Visible;
             }
             else if(mainWindow.sideBar.Visibility == Visibility.Visible)
             {
@@ -52,7 +53,31 @@ namespace Alerts.UI
                 mainWindow.sideBar.gridCoin.Visibility = Visibility.Collapsed;
                 mainWindow.sideBar.gridPairing.Visibility = Visibility.Collapsed;
                 mainWindow.sideBar.gridExchange.Visibility = Visibility.Collapsed;
+                mainWindow.darkener.Visibility = Visibility.Collapsed;
             }
+
+            if (mainWindow.notifySideBar.Visibility == Visibility.Visible)
+                mainWindow.notifySideBar.Visibility = Visibility.Collapsed;
+        }
+
+        private void notificationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application curApp = Application.Current;
+            MainWindow mainWindow = (MainWindow)curApp.MainWindow;
+
+            if (mainWindow.notifySideBar.Visibility == Visibility.Collapsed)
+            {
+                mainWindow.notifySideBar.Visibility = Visibility.Visible;
+                mainWindow.darkener.Visibility = Visibility.Visible;
+            }
+            else if (mainWindow.notifySideBar.Visibility == Visibility.Visible)
+            {
+                mainWindow.notifySideBar.Visibility = Visibility.Collapsed;
+                mainWindow.darkener.Visibility = Visibility.Collapsed;
+            }
+
+            if(mainWindow.sideBar.Visibility == Visibility.Visible)
+                mainWindow.sideBar.Visibility = Visibility.Collapsed;
         }
     }
 }

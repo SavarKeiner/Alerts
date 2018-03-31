@@ -204,11 +204,12 @@
             </WrapPanel>
         </ScrollViewer>
 
-        <Grid x:Name="notificationArea" Canvas.Left="100" Canvas.Top="650" Width="1172" Height="50">
-            
-        </Grid>
+        <Grid x:Name="notificationArea" Canvas.Left="100" Canvas.Top="650" Width="1172" Height="50"> </Grid>
+
+        <Rectangle x:Name="darkener" Fill="Black" Opacity="0.7" Canvas.Left="100" Canvas.Top="0" Height="{Binding ActualHeight, ElementName=mW}" Visibility="Collapsed"></Rectangle>
 
         <control:SideBar x:Name="sideBar" Canvas.Left="100" Canvas.Top="0" Height="{Binding ActualHeight, ElementName=mW}"></control:SideBar>
         <control:SideMenu x:Name="sideMenu" Canvas.Top="0" Canvas.Left="0" Height="{Binding ActualHeight, ElementName=mW}"></control:SideMenu>
+        <control:NotificationsSideBar x:Name="notifySideBar" Canvas.Left="100" Canvas.Top="0" Height="{Binding ActualHeight, ElementName=mW}" Width="500" Visibility="Collapsed"></control:NotificationsSideBar>
     </Canvas>
 </Window>

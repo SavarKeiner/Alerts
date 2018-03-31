@@ -175,8 +175,14 @@
     <Compile Include="UI\ImageTextItem.xaml.cs">
       <DependentUpon>ImageTextItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\NotificationsEntry.xaml.cs">
+      <DependentUpon>NotificationsEntry.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\NotificationsPop.xaml.cs">
       <DependentUpon>NotificationsPop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\NotificationsSideBar.xaml.cs">
+      <DependentUpon>NotificationsSideBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SideBar.xaml.cs">
       <DependentUpon>SideBar.xaml</DependentUpon>
@@ -236,7 +242,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\NotificationsEntry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\NotificationsPop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\NotificationsSideBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -396,6 +410,12 @@
     <Resource Include="UI\Icons\CoinIcons\XMR.svg" />
     <Resource Include="UI\Icons\CoinIcons\XVG.svg" />
     <Resource Include="UI\Icons\CoinIcons\XZC.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\GAS.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Icons\CoinIcons\HSR.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

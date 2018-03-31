@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -92,6 +93,10 @@ namespace Alerts.UI
             };
 
             mainWindow.notificationArea.Children.Add(pop);
+
+            mainWindow.notifySideBar.AddNotification(str + " "  + DateTime.Now.ToString("HH:mm:ss"));
+
+            SystemSounds.Beep.Play();
         }
     }
 }

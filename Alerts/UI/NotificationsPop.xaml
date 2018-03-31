@@ -23,7 +23,7 @@
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <Button x:Name="closeButton" MinWidth="20" HorizontalAlignment="Right" Content="CLOSE" Padding="3" Margin="5,0,5,0" Background="Transparent" Height="30" Width="50" Foreground="White"></Button>
-            <Label x:Name="messageLabel" Content="test string _____________________________" Foreground="White" FontWeight="SemiBold" FontSize="18" FontFamily="Courier"></Label>
+            <Label x:Name="messageLabel" Content="test string " Foreground="White" FontWeight="SemiBold" FontSize="18" FontFamily="Courier"></Label>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -71,7 +71,7 @@ namespace Alerts
 
             Canvas.SetTop(notificationArea, mW.ActualHeight - notificationArea.ActualHeight);
             notificationArea.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
-
+            darkener.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
             //listCellCoin.Width = e.NewSize.Width - sideMenu.ActualWidth - 16;
             reSize();
         }

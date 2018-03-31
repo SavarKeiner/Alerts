@@ -4,7 +4,9 @@ using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -132,6 +134,8 @@ namespace Alerts.UI
                 paringCoinDict.TryGetValue(selectedPairing, out lc);
 
                 coineSourceBinance.Clear();
+
+
                 foreach (Coins c in lc)
                 {
                     System.Diagnostics.Debug.WriteLine("DBG-EX: " + c);
@@ -144,13 +148,16 @@ namespace Alerts.UI
                     }
                     catch (Exception ex)
                     {
+                        System.Diagnostics.Debug.WriteLine("DBG-IMAGe-EX: " + c + " " + ex.Message);
                         ImageTextItem item = new ImageTextItem();
                         item.image.Source = new Uri("/UI/Icons/CoinIcons/WhiteCircle.svg", UriKind.Relative);
                         item.text.Content = c;
                         coineSourceBinance.Add(item);
-                        System.Diagnostics.Debug.WriteLine("DBG-IMAGE-EX: " + ex.Message);
                     }
+
+
                 }
+
                 listCoins.ItemsSource = null;
                 listCoins.ItemsSource = coineSourceBinance;
             }
@@ -228,41 +235,31 @@ namespace Alerts.UI
                     foreach (JToken token in jt)
                     {
 
-                        try
+                        Coins k; //pair
+                        Coins v = Coins.INIT; //coin
+
+                        if (Enum.TryParse<Coins>(token.SelectToken("quoteAsset").ToString(), out k) == true && Enum.TryParse<Coins>(token.SelectToken("baseAsset").ToString(), out v) == true)
                         {
-                            Coins k; //pair
-                            Coins v = Coins.INIT; //coin
-
-                            if (Enum.TryParse<Coins>(token.SelectToken("quoteAsset").ToString(), out k) == true && Enum.TryParse<Coins>(token.SelectToken("baseAsset").ToString(), out v) == true)
+                            if ("456".Equals(token.SelectToken("quoteAsset").ToString()) == false)
                             {
-                                if ("456".Equals(token.SelectToken("quoteAsset").ToString()) == false)
+                                if (!paringCoinDict.ContainsKey(k)) //pair does not exist
                                 {
-                                    if (!paringCoinDict.ContainsKey(k)) //pair does not exist
-                                    {
-                                        List<Coins> lv = new List<Coins>();
-                                        lv.Add(v);
+                                    List<Coins> lv = new List<Coins>();
+                                    lv.Add(v);
 
-                                        paringCoinDict.Add(k, lv);
-                                    }
-                                    else //pair exists
-                                    {
-                                        List<Coins> lv;
-                                        paringCoinDict.TryGetValue(k, out lv);
-                                        lv.Add(v);
-                                    }
+                                    paringCoinDict.Add(k, lv);
                                 }
-
+                                else //pair exists
+                                {
+                                    List<Coins> lv;
+                                    paringCoinDict.TryGetValue(k, out lv);
+                                    lv.Add(v);
+                                }
                             }
 
-
-
-                            //paringCoinDict.Add((Coins)Enum.Parse(typeof(Coins), token.SelectToken("quoteAsset").ToString()), (Coins)Enum.Parse(typeof(Coins), token.SelectToken("baseAsset").ToString()));
                         }
-                        catch (Exception e)
-                        {
-                            System.Diagnostics.Debug.WriteLine("DBG-EXCEPTION: " + e.Message + " " + e.StackTrace);
-                            //do nothing for now
-                        }
+                        //paringCoinDict.Add((Coins)Enum.Parse(typeof(Coins), token.SelectToken("quoteAsset").ToString()), (Coins)Enum.Parse(typeof(Coins), token.SelectToken("baseAsset").ToString()));
+
 
                     }
                 }
@@ -387,6 +384,7 @@ namespace Alerts.UI
                 gridCoin.Visibility = Visibility.Collapsed;
                 gridPairing.Visibility = Visibility.Collapsed;
                 gridExchange.Visibility = Visibility.Collapsed;
+                mainWindow.darkener.Visibility = Visibility.Collapsed;
 
             }
         }

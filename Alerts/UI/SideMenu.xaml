@@ -24,7 +24,7 @@
             </Grid>
         </Button>
 
-        <Button HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave">
+        <Button x:Name="notificationBtn" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="notificationBtn_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <ContentPresenter Content="{TemplateBinding Content}"/>
