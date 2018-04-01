@@ -1,1 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1330" height="2000" viewBox="0 0 1330 2000"><path d="M1477,199.17C1349.78,63.62,1192.17,0,1001.38,0,807.83,0,650.22,63.62,523,193.64,395.83,320.89,335,484.09,335,680.5c0,193.64,63.6,356.85,190.79,486.86,99.54,102.35,218.44,163.21,353.93,185.34v116.18H600.45v124.48h282v66.39h-282v116.18H879.72V2000h240.56V1775.93h282V1659.75h-284.8v-66.39h284.8V1468.88h-282V1355.46c138.25-22.13,257.15-83,356.69-185.34,124.43-130,188-293.22,188-486.86C1665,492.39,1601.4,329.18,1477,199.17ZM1217.06,937.76c-52.54,66.39-127.19,99.59-215.68,99.59-85.72,0-157.61-33.19-212.91-99.59s-83-152.14-83-260c0-105.12,27.65-188.11,83-254.5s127.19-99.59,212.91-99.59c83,0,154.84,33.2,210.15,102.35,58.07,66.39,85.72,152.14,85.72,254.5C1297.25,785.62,1269.59,871.37,1217.06,937.76Z" transform="translate(-335)" fill="#01a64f"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="mda-c" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity=".5"/>
+      <stop offset="100%" stop-opacity=".5"/>
+    </linearGradient>
+    <circle id="mda-b" cx="16" cy="15" r="15"/>
+    <filter id="mda-a" width="111.7%" height="111.7%" x="-5.8%" y="-4.2%" filterUnits="objectBoundingBox">
+      <feOffset dy=".5" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+      <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.199473505 0"/>
+    </filter>
+    <path id="mda-e" d="M20.6626577,6.9917 C21.878625,8.2918 22.5002931,9.9239 22.4999999,11.8326 C22.4999999,13.769 21.878625,15.4012 20.6623645,16.7012 C19.6893952,17.7246 18.5271885,18.3333 17.1758423,18.5546 L17.1758423,19.6888 L19.9322954,19.6888 L19.9322954,20.9336 L17.1484732,20.9336 L17.1484732,21.5975 L19.9322954,21.5975 L19.9322954,22.7593 L17.1758423,22.7593 L17.1758423,25 L14.8244509,25 L14.8244509,22.7593 L12.0946826,22.7593 L12.0946826,21.5975 L14.8511357,21.5975 L14.8511357,20.9336 L12.0946826,20.9336 L12.0946826,19.6888 L14.8244509,19.6888 L14.8244509,18.527 C13.5000827,18.3057 12.337876,17.6971 11.3649067,16.6736 C10.1216682,15.3735 9.5,13.7414 9.5,11.805 C9.5,9.8409 10.0945924,8.2089 11.3376354,6.9364 C12.5811672,5.6362 14.1217508,5 16.0136356,5 C17.8785423,5 19.4191259,5.6362 20.6626577,6.9917 Z M18.1218335,14.3776 C18.6352962,13.7137 18.9056632,12.8562 18.9056632,11.8052 C18.9056632,10.7816 18.635394,9.9241 18.0677797,9.2602 C17.5271434,8.5687 16.8249321,8.2367 16.0136356,8.2367 C15.175752,8.2367 14.4735407,8.5687 13.9325135,9.2326 C13.3914862,9.8965 13.121217,10.7264 13.121217,11.7776 C13.121217,12.8562 13.391975,13.7136 13.9325135,14.3776 C14.473052,15.0416 15.175752,15.3735 16.0136356,15.3735 C16.8785949,15.3735 17.6082731,15.0415 18.1218335,14.3776 Z"/>
+    <filter id="mda-d" width="126.9%" height="117.5%" x="-13.5%" y="-6.2%" filterUnits="objectBoundingBox">
+      <feOffset dy=".5" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.204257246 0"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <g fill-rule="nonzero">
+      <use fill="#000" filter="url(#mda-a)" xlink:href="#mda-b"/>
+      <use fill="#01A64F" fill-rule="evenodd" xlink:href="#mda-b"/>
+      <use fill="url(#mda-c)" fill-rule="evenodd" style="mix-blend-mode:soft-light" xlink:href="#mda-b"/>
+      <circle cx="16" cy="15" r="14.5" stroke="#000" stroke-opacity=".097"/>
+    </g>
+    <g fill-rule="nonzero">
+      <use fill="#000" filter="url(#mda-d)" xlink:href="#mda-e"/>
+      <use fill="#FFF" fill-rule="evenodd" xlink:href="#mda-e"/>
+    </g>
+  </g>
+</svg>

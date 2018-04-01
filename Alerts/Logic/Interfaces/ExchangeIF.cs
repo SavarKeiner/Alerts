@@ -13,13 +13,13 @@ namespace Alerts.Logic.Interfaces
     public interface ExchangeIF
     {
         Exchanges Exchange { get; }
-        Coins Coin { get; set; }
-        Coins Pair { get; set; }
         string ApiUrl { get; }
 
-        void CandlePull(CandleWidth width, CancellationToken token);
+        void CandlePull(CandleWidth width, Coins Coin, Coins Pair, CancellationToken token);
 
         void remove(AlertCard card, List<AlertCard> childList);
-        void add(AlertCard card, List<AlertCard> childList);
+        void add(AlertCard card, Coins Coin, Coins Pair, List<AlertCard> childList);
+        List<ImageTextItem> GetPairList();
+        List<ImageTextItem> GetCoinsListFromPair(Coins Pair);
     }
 }

@@ -298,9 +298,6 @@
     <Resource Include="UI\Icons\ic_volume_off_white_24dp_2x.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\BTC.svg">
-      <SubType>Designer</SubType>
-    </Resource>
     <Resource Include="UI\Icons\ExchangeIcons\binance.svg" />
     <Resource Include="UI\Icons\ic_add_white_24dp_2x.png" />
   </ItemGroup>
@@ -333,89 +330,326 @@
     <Resource Include="UI\Icons\ButtonIcons\ic_notifications_white_24px.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\ETH.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\USDT.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\BNB.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\LTC.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\NEO.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\TRX.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\ADA.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\IOTA.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\VEN.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\XRP.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="UI\Icons\ButtonIcons\ic_close_white_24px.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\ADX.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\AION.svg" />
-    <Resource Include="UI\Icons\CoinIcons\BAT.svg" />
-    <Resource Include="UI\Icons\CoinIcons\BCC.svg" />
-    <Resource Include="UI\Icons\CoinIcons\AST.svg" />
+    <Resource Include="UI\Icons\CoinIcons\abt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\act.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ada.svg" />
+    <Resource Include="UI\Icons\CoinIcons\adx.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ae.svg" />
+    <Resource Include="UI\Icons\CoinIcons\agi.svg" />
+    <Resource Include="UI\Icons\CoinIcons\agrs.svg" />
+    <Resource Include="UI\Icons\CoinIcons\aion.svg" />
+    <Resource Include="UI\Icons\CoinIcons\amb.svg" />
+    <Resource Include="UI\Icons\CoinIcons\amp.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ant.svg" />
+    <Resource Include="UI\Icons\CoinIcons\appc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ardr.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ark.svg" />
+    <Resource Include="UI\Icons\CoinIcons\arn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ary.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ast.svg" />
+    <Resource Include="UI\Icons\CoinIcons\atm.svg" />
+    <Resource Include="UI\Icons\CoinIcons\auto.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bat.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bay.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bcc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bcd.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bch.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bcn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bco.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bcpt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bdl.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bela.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bix.svg" />
+    <Resource Include="UI\Icons\CoinIcons\blcn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\blk.svg" />
+    <Resource Include="UI\Icons\CoinIcons\block.svg" />
+    <Resource Include="UI\Icons\CoinIcons\blz.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bnb.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bnt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bnty.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bos.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bpt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bq.svg" />
+    <Resource Include="UI\Icons\CoinIcons\brd.svg" />
+    <Resource Include="UI\Icons\CoinIcons\btc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\btcd.svg" />
+    <Resource Include="UI\Icons\CoinIcons\btcp.svg" />
+    <Resource Include="UI\Icons\CoinIcons\btcz.svg" />
+    <Resource Include="UI\Icons\CoinIcons\btg.svg" />
+    <Resource Include="UI\Icons\CoinIcons\btm.svg" />
+    <Resource Include="UI\Icons\CoinIcons\bts.svg" />
+    <Resource Include="UI\Icons\CoinIcons\btx.svg" />
+    <Resource Include="UI\Icons\CoinIcons\burst.svg" />
+    <Resource Include="UI\Icons\CoinIcons\cdn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\cdt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\chips.svg" />
+    <Resource Include="UI\Icons\CoinIcons\cix.svg" />
+    <Resource Include="UI\Icons\CoinIcons\clam.svg" />
+    <Resource Include="UI\Icons\CoinIcons\cloak.svg" />
+    <Resource Include="UI\Icons\CoinIcons\cmt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\cnd.svg" />
+    <Resource Include="UI\Icons\CoinIcons\cnx.svg" />
+    <Resource Include="UI\Icons\CoinIcons\cny.svg" />
+    <Resource Include="UI\Icons\CoinIcons\cob.svg" />
+    <Resource Include="UI\Icons\CoinIcons\cred.svg" />
+    <Resource Include="UI\Icons\CoinIcons\crpt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\cs.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ctr.svg" />
+    <Resource Include="UI\Icons\CoinIcons\cvc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\dash.svg" />
+    <Resource Include="UI\Icons\CoinIcons\dat.svg" />
+    <Resource Include="UI\Icons\CoinIcons\data.svg" />
+    <Resource Include="UI\Icons\CoinIcons\dbc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\dcn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\dcr.svg" />
+    <Resource Include="UI\Icons\CoinIcons\dent.svg" />
+    <Resource Include="UI\Icons\CoinIcons\dew.svg" />
+    <Resource Include="UI\Icons\CoinIcons\dgb.svg" />
+    <Resource Include="UI\Icons\CoinIcons\dgd.svg" />
+    <Resource Include="UI\Icons\CoinIcons\dlt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\dnt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\doge.svg" />
+    <Resource Include="UI\Icons\CoinIcons\drgn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\dta.svg" />
+    <Resource Include="UI\Icons\CoinIcons\dtr.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ebst.svg" />
+    <Resource Include="UI\Icons\CoinIcons\edg.svg" />
+    <Resource Include="UI\Icons\CoinIcons\edo.svg" />
+    <Resource Include="UI\Icons\CoinIcons\edoge.svg" />
+    <Resource Include="UI\Icons\CoinIcons\elf.svg" />
+    <Resource Include="UI\Icons\CoinIcons\elix.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ella.svg" />
+    <Resource Include="UI\Icons\CoinIcons\emc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\emc2.svg" />
+    <Resource Include="UI\Icons\CoinIcons\eng.svg" />
+    <Resource Include="UI\Icons\CoinIcons\enj.svg" />
+    <Resource Include="UI\Icons\CoinIcons\eos.svg" />
+    <Resource Include="UI\Icons\CoinIcons\equa.svg" />
+    <Resource Include="UI\Icons\CoinIcons\etc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\eth.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ethos.svg" />
+    <Resource Include="UI\Icons\CoinIcons\etn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\etp.svg" />
+    <Resource Include="UI\Icons\CoinIcons\eur.svg" />
+    <Resource Include="UI\Icons\CoinIcons\evx.svg" />
+    <Resource Include="UI\Icons\CoinIcons\exmo.svg" />
+    <Resource Include="UI\Icons\CoinIcons\exp.svg" />
+    <Resource Include="UI\Icons\CoinIcons\fair.svg" />
+    <Resource Include="UI\Icons\CoinIcons\fct.svg" />
+    <Resource Include="UI\Icons\CoinIcons\fil.svg" />
+    <Resource Include="UI\Icons\CoinIcons\fldc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\flo.svg" />
+    <Resource Include="UI\Icons\CoinIcons\fsn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ftc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\fuel.svg" />
+    <Resource Include="UI\Icons\CoinIcons\fun.svg" />
+    <Resource Include="UI\Icons\CoinIcons\game.svg" />
+    <Resource Include="UI\Icons\CoinIcons\gas.svg" />
+    <Resource Include="UI\Icons\CoinIcons\gbp.svg" />
+    <Resource Include="UI\Icons\CoinIcons\gbx.svg" />
+    <Resource Include="UI\Icons\CoinIcons\gbyte.svg" />
+    <Resource Include="UI\Icons\CoinIcons\generic.svg" />
+    <Resource Include="UI\Icons\CoinIcons\gno.svg" />
+    <Resource Include="UI\Icons\CoinIcons\gnt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\grc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\grs.svg" />
+    <Resource Include="UI\Icons\CoinIcons\gto.svg" />
+    <Resource Include="UI\Icons\CoinIcons\gup.svg" />
+    <Resource Include="UI\Icons\CoinIcons\gvt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\gxs.svg" />
+    <Resource Include="UI\Icons\CoinIcons\hpb.svg" />
+    <Resource Include="UI\Icons\CoinIcons\hsr.svg" />
+    <Resource Include="UI\Icons\CoinIcons\html.svg" />
+    <Resource Include="UI\Icons\CoinIcons\huc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\hush.svg" />
+    <Resource Include="UI\Icons\CoinIcons\icn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\icx.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ignis.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ink.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ins.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ion.svg" />
+    <Resource Include="UI\Icons\CoinIcons\iop.svg" />
+    <Resource Include="UI\Icons\CoinIcons\iost.svg" />
+    <Resource Include="UI\Icons\CoinIcons\itc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\jnt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\jpy.svg" />
+    <Resource Include="UI\Icons\CoinIcons\kcs.svg" />
+    <Resource Include="UI\Icons\CoinIcons\kin.svg" />
+    <Resource Include="UI\Icons\CoinIcons\kmd.svg" />
+    <Resource Include="UI\Icons\CoinIcons\knc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\krb.svg" />
+    <Resource Include="UI\Icons\CoinIcons\lbc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\lend.svg" />
+    <Resource Include="UI\Icons\CoinIcons\link.svg" />
+    <Resource Include="UI\Icons\CoinIcons\lkk.svg" />
+    <Resource Include="UI\Icons\CoinIcons\lrc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\lsk.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ltc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\lun.svg" />
+    <Resource Include="UI\Icons\CoinIcons\maid.svg" />
+    <Resource Include="UI\Icons\CoinIcons\mana.svg" />
+    <Resource Include="UI\Icons\CoinIcons\mcap.svg" />
+    <Resource Include="UI\Icons\CoinIcons\mco.svg" />
+    <Resource Include="UI\Icons\CoinIcons\mda.svg" />
+    <Resource Include="UI\Icons\CoinIcons\mds.svg" />
+    <Resource Include="UI\Icons\CoinIcons\med.svg" />
+    <Resource Include="UI\Icons\CoinIcons\miota.svg" />
+    <Resource Include="UI\Icons\CoinIcons\mkr.svg" />
+    <Resource Include="UI\Icons\CoinIcons\mln.svg" />
+    <Resource Include="UI\Icons\CoinIcons\mnx.svg" />
+    <Resource Include="UI\Icons\CoinIcons\mod.svg" />
+    <Resource Include="UI\Icons\CoinIcons\mona.svg" />
+    <Resource Include="UI\Icons\CoinIcons\mth.svg" />
+    <Resource Include="UI\Icons\CoinIcons\mtl.svg" />
+    <Resource Include="UI\Icons\CoinIcons\music.svg" />
+    <Resource Include="UI\Icons\CoinIcons\mzc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\nano.svg" />
+    <Resource Include="UI\Icons\CoinIcons\nas.svg" />
+    <Resource Include="UI\Icons\CoinIcons\nav.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ncash.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ndz.svg" />
+    <Resource Include="UI\Icons\CoinIcons\nebl.svg" />
+    <Resource Include="UI\Icons\CoinIcons\neo.svg" />
+    <Resource Include="UI\Icons\CoinIcons\neos.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ngc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\nlc2.svg" />
+    <Resource Include="UI\Icons\CoinIcons\nlg.svg" />
+    <Resource Include="UI\Icons\CoinIcons\nmc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\nuls.svg" />
+    <Resource Include="UI\Icons\CoinIcons\nxs.svg" />
+    <Resource Include="UI\Icons\CoinIcons\nxt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\oax.svg" />
+    <Resource Include="UI\Icons\CoinIcons\omg.svg" />
+    <Resource Include="UI\Icons\CoinIcons\omni.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ont.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ost.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ox.svg" />
+    <Resource Include="UI\Icons\CoinIcons\part.svg" />
+    <Resource Include="UI\Icons\CoinIcons\pasl.svg" />
+    <Resource Include="UI\Icons\CoinIcons\pay.svg" />
+    <Resource Include="UI\Icons\CoinIcons\pink.svg" />
+    <Resource Include="UI\Icons\CoinIcons\pirl.svg" />
+    <Resource Include="UI\Icons\CoinIcons\pivx.svg" />
+    <Resource Include="UI\Icons\CoinIcons\plr.svg" />
+    <Resource Include="UI\Icons\CoinIcons\poa.svg" />
+    <Resource Include="UI\Icons\CoinIcons\poe.svg" />
+    <Resource Include="UI\Icons\CoinIcons\poly.svg" />
+    <Resource Include="UI\Icons\CoinIcons\pot.svg" />
+    <Resource Include="UI\Icons\CoinIcons\powr.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ppc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ppp.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ppt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\prl.svg" />
+    <Resource Include="UI\Icons\CoinIcons\pura.svg" />
+    <Resource Include="UI\Icons\CoinIcons\qash.svg" />
+    <Resource Include="UI\Icons\CoinIcons\qiwi.svg" />
+    <Resource Include="UI\Icons\CoinIcons\qlc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\qrl.svg" />
+    <Resource Include="UI\Icons\CoinIcons\qsp.svg" />
+    <Resource Include="UI\Icons\CoinIcons\qtum.svg" />
+    <Resource Include="UI\Icons\CoinIcons\r.svg" />
+    <Resource Include="UI\Icons\CoinIcons\rads.svg" />
+    <Resource Include="UI\Icons\CoinIcons\rcn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\rdd.svg" />
+    <Resource Include="UI\Icons\CoinIcons\rdn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\rep.svg" />
+    <Resource Include="UI\Icons\CoinIcons\req.svg" />
+    <Resource Include="UI\Icons\CoinIcons\rhoc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ric.svg" />
+    <Resource Include="UI\Icons\CoinIcons\rise.svg" />
+    <Resource Include="UI\Icons\CoinIcons\rlc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\rpx.svg" />
+    <Resource Include="UI\Icons\CoinIcons\rub.svg" />
+    <Resource Include="UI\Icons\CoinIcons\rvn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\salt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\san.svg" />
+    <Resource Include="UI\Icons\CoinIcons\sbd.svg" />
+    <Resource Include="UI\Icons\CoinIcons\sberbank.svg" />
+    <Resource Include="UI\Icons\CoinIcons\sc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\sky.svg" />
+    <Resource Include="UI\Icons\CoinIcons\slr.svg" />
+    <Resource Include="UI\Icons\CoinIcons\sls.svg" />
+    <Resource Include="UI\Icons\CoinIcons\smart.svg" />
+    <Resource Include="UI\Icons\CoinIcons\sngls.svg" />
+    <Resource Include="UI\Icons\CoinIcons\snm.svg" />
+    <Resource Include="UI\Icons\CoinIcons\snt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\spank.svg" />
+    <Resource Include="UI\Icons\CoinIcons\sphtx.svg" />
+    <Resource Include="UI\Icons\CoinIcons\srn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\start.svg" />
+    <Resource Include="UI\Icons\CoinIcons\steem.svg" />
+    <Resource Include="UI\Icons\CoinIcons\storj.svg" />
+    <Resource Include="UI\Icons\CoinIcons\storm.svg" />
+    <Resource Include="UI\Icons\CoinIcons\strat.svg" />
+    <Resource Include="UI\Icons\CoinIcons\sub.svg" />
+    <Resource Include="UI\Icons\CoinIcons\sys.svg" />
+    <Resource Include="UI\Icons\CoinIcons\taas.svg" />
+    <Resource Include="UI\Icons\CoinIcons\tau.svg" />
+    <Resource Include="UI\Icons\CoinIcons\tel.svg" />
+    <Resource Include="UI\Icons\CoinIcons\theta.svg" />
+    <Resource Include="UI\Icons\CoinIcons\tix.svg" />
+    <Resource Include="UI\Icons\CoinIcons\tkn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\tnb.svg" />
+    <Resource Include="UI\Icons\CoinIcons\tnc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\tnt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\trig.svg" />
+    <Resource Include="UI\Icons\CoinIcons\trx.svg" />
+    <Resource Include="UI\Icons\CoinIcons\tzc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ubq.svg" />
+    <Resource Include="UI\Icons\CoinIcons\unity.svg" />
+    <Resource Include="UI\Icons\CoinIcons\usd.svg" />
+    <Resource Include="UI\Icons\CoinIcons\usdt.svg" />
+    <Resource Include="UI\Icons\CoinIcons\utk.svg" />
+    <Resource Include="UI\Icons\CoinIcons\ven.svg" />
+    <Resource Include="UI\Icons\CoinIcons\veri.svg" />
+    <Resource Include="UI\Icons\CoinIcons\via.svg" />
+    <Resource Include="UI\Icons\CoinIcons\vib.svg" />
+    <Resource Include="UI\Icons\CoinIcons\vibe.svg" />
+    <Resource Include="UI\Icons\CoinIcons\vivo.svg" />
+    <Resource Include="UI\Icons\CoinIcons\vrc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\vtc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\wabi.svg" />
+    <Resource Include="UI\Icons\CoinIcons\waves.svg" />
+    <Resource Include="UI\Icons\CoinIcons\wax.svg" />
+    <Resource Include="UI\Icons\CoinIcons\wgr.svg" />
+    <Resource Include="UI\Icons\CoinIcons\wings.svg" />
+    <Resource Include="UI\Icons\CoinIcons\wpr.svg" />
+    <Resource Include="UI\Icons\CoinIcons\wtc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xas.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xbc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xby.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xcp.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xdn.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xem.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xlm.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xmg.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xmr.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xmy.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xp.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xpa.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xpm.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xrb.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xrp.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xtz.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xuc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xvc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xvg.svg" />
+    <Resource Include="UI\Icons\CoinIcons\xzc.svg" />
+    <Resource Include="UI\Icons\CoinIcons\yoyow.svg" />
+    <Resource Include="UI\Icons\CoinIcons\zcl.svg" />
+    <Resource Include="UI\Icons\CoinIcons\zec.svg" />
+    <Resource Include="UI\Icons\CoinIcons\zen.svg" />
+    <Resource Include="UI\Icons\CoinIcons\zil.svg" />
+    <Resource Include="UI\Icons\CoinIcons\zrx.svg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Icons\CoinIcons\WhiteCircle.svg" />
-    <Resource Include="UI\Icons\CoinIcons\BNT.svg" />
-    <Resource Include="UI\Icons\CoinIcons\BTG.svg" />
-    <Resource Include="UI\Icons\CoinIcons\BTS.svg" />
-    <Resource Include="UI\Icons\CoinIcons\DASH.svg" />
-    <Resource Include="UI\Icons\CoinIcons\DGD.svg" />
-    <Resource Include="UI\Icons\CoinIcons\EDO.svg" />
-    <Resource Include="UI\Icons\CoinIcons\EOS.svg" />
-    <Resource Include="UI\Icons\CoinIcons\ETC.svg" />
-    <Resource Include="UI\Icons\CoinIcons\FUEL.svg" />
-    <Resource Include="UI\Icons\CoinIcons\FUN.svg" />
-    <Resource Include="UI\Icons\CoinIcons\GVT.svg" />
-    <Resource Include="UI\Icons\CoinIcons\GXS.svg" />
-    <Resource Include="UI\Icons\CoinIcons\KMD.svg" />
-    <Resource Include="UI\Icons\CoinIcons\LINK.svg" />
-    <Resource Include="UI\Icons\CoinIcons\LRC.svg" />
-    <Resource Include="UI\Icons\CoinIcons\MDA.svg" />
-    <Resource Include="UI\Icons\CoinIcons\MOD.svg" />
-    <Resource Include="UI\Icons\CoinIcons\MTL.svg" />
-    <Resource Include="UI\Icons\CoinIcons\NANO.svg" />
-    <Resource Include="UI\Icons\CoinIcons\NEBL.svg" />
-    <Resource Include="UI\Icons\CoinIcons\OMG.svg" />
-    <Resource Include="UI\Icons\CoinIcons\PIVX.svg" />
-    <Resource Include="UI\Icons\CoinIcons\PPT.svg" />
-    <Resource Include="UI\Icons\CoinIcons\QTUM.svg" />
-    <Resource Include="UI\Icons\CoinIcons\RDN.svg" />
-    <Resource Include="UI\Icons\CoinIcons\SNM.svg" />
-    <Resource Include="UI\Icons\CoinIcons\SNT.svg" />
-    <Resource Include="UI\Icons\CoinIcons\STEEM.svg" />
-    <Resource Include="UI\Icons\CoinIcons\STORJ.svg" />
-    <Resource Include="UI\Icons\CoinIcons\VIBE.svg" />
-    <Resource Include="UI\Icons\CoinIcons\XLM.svg" />
-    <Resource Include="UI\Icons\CoinIcons\XMR.svg" />
-    <Resource Include="UI\Icons\CoinIcons\XVG.svg" />
-    <Resource Include="UI\Icons\CoinIcons\XZC.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\GAS.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="UI\Icons\CoinIcons\HSR.svg" />
+    <Resource Include="UI\Icons\CoinIcons\iota.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

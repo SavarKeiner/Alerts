@@ -53,7 +53,8 @@ namespace Alerts.UI
 
             if (Exchange == Exchanges.Binance)
             {
-                exchangeIF = new Binance(this, Coin, Pair);
+                Binance b = Binance.Instance;
+                exchangeIF = b;
             }
 
             /*AlertCard card = new AlertCard();
@@ -85,7 +86,12 @@ namespace Alerts.UI
 
         public void addTo(AlertCard card)
         {
-            exchangeIF.add(card, childList);
+            if(childList.Count == 0)
+            {
+                Header.PullData(Exchange, Coin, Pair);
+            }
+
+            exchangeIF.add(card, Coin, Pair, childList);
             CardGrid.Children.Add(card);
             SetPosition();
         }
@@ -100,6 +106,7 @@ namespace Alerts.UI
                 Application curApp = Application.Current;
                 MainWindow mainWindow = (MainWindow)curApp.MainWindow;
 
+                Header.source.Cancel();
                 mainWindow.listCellCoin.Children.Remove(this);
             }
 

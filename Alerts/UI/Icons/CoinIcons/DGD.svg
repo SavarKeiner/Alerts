@@ -1,1 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000" width="2000" height="2000"><g fill="#014655"><path d="m573.7 737h273.61v88.26h-273.61v-88.26m685.79 406h-641.66v326.57h640.77c89.14 0 166.81-74.14 166.81-164.17-1.76-90.93-75.01-163.3-165.92-162.4"/><path d="M1000,0C447.48,0,0,447.48,0,1000S447.48,2000,1000,2000s1000-447.48,1000-1000C2000.88,447.48,1552.51,0,1000,0Zm32.66,445.72h476.61v97.09h-370.7V825.24h273.61V737H1218V639.89h300.09V922.33H1032.66V445.72Zm-547.22,8.83H785.52V569.28H485.44V454.55Zm-8.83,185.35H856.13V445.72H962V922.33H476.61V639.89Zm804.94,953.22H485.44v-573.7h796.12c154.46,0,280.67,129.74,280.67,286.85S1436,1593.11,1281.55,1593.11Z"/></g><path d="M485.44,454.55H785.52V569.28H485.44V454.55Z" fill="#c39145"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="dgd-c" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity=".5"/>
+      <stop offset="100%" stop-opacity=".5"/>
+    </linearGradient>
+    <circle id="dgd-b" cx="16" cy="15" r="15"/>
+    <filter id="dgd-a" width="111.7%" height="111.7%" x="-5.8%" y="-4.2%" filterUnits="objectBoundingBox">
+      <feOffset dy=".5" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+      <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.199473505 0"/>
+    </filter>
+    <path id="dgd-e" d="M12.5,10 L12.5,13 L5.5,13 L5.5,10 L12.5,10 Z M13.5,10 L15.5,10 L15.5,20 L5.5,20 L5.5,14 L13.5,14 L13.5,10 Z M7.5,16 L7.5,18 L13.5,18 L13.5,16 L7.5,16 Z M26.5,12 L18.5,12 L18.5,18 L24.5,18 L24.5,16 L20.5,16 L20.5,14 L26.5,14 L26.5,20 L16.5,20 L16.5,10 L26.5,10 L26.5,12 Z"/>
+    <filter id="dgd-d" width="116.7%" height="135%" x="-8.3%" y="-12.5%" filterUnits="objectBoundingBox">
+      <feOffset dy=".5" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.204257246 0"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <use fill="#000" filter="url(#dgd-a)" xlink:href="#dgd-b"/>
+    <use fill="#F4D029" xlink:href="#dgd-b"/>
+    <use fill="url(#dgd-c)" style="mix-blend-mode:soft-light" xlink:href="#dgd-b"/>
+    <circle cx="16" cy="15" r="14.5" stroke="#000" stroke-opacity=".097"/>
+    <g>
+      <use fill="#000" filter="url(#dgd-d)" xlink:href="#dgd-e"/>
+      <use fill="#FFF" xlink:href="#dgd-e"/>
+    </g>
+  </g>
+</svg>

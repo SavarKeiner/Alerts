@@ -4,6 +4,7 @@ using Alerts.Logic.Interfaces;
 using Alerts.Logic.RESTObjects;
 using Alerts.UI;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,22 @@ namespace Alerts.Logic.ExchangeCode
 {
     public class Binance : ExchangeIF
     {
+        private static Binance instance;
+        public static Binance Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Binance();
+                }
+                return instance;
+            }
+        }
+
         public Exchanges Exchange { get; } = Exchanges.Binance;
-        public Coins Coin { get; set; }
-        public Coins Pair { get; set; }
+        //public Coins Coin { get; set; }
+        //public Coins Pair { get; set; }
         public string ApiUrl { get; } = "https://api.binance.com/api/v1";
         public int maxLimit { get; } = 200;
         public int minLimit { get; } = 2;
@@ -27,26 +41,23 @@ namespace Alerts.Logic.ExchangeCode
         private Dictionary<CandleWidth, CancellationTokenSource> stopAsyncToken = new Dictionary<CandleWidth, CancellationTokenSource>();
         private Dictionary<CandleWidth, List<CandleBinance>> dictCandle = new Dictionary<CandleWidth, List<CandleBinance>>();
 
-        private AlertLayout parent;
+        private Dictionary<Coins, List<Coins>> paringCoinDict = new Dictionary<Coins, List<Coins>>();
+        private Dictionary<ImageTextItem, List<ImageTextItem>> uiCoinsList = new Dictionary<ImageTextItem, List<ImageTextItem>>();
 
         public int sleepTime = 1000;
 
-        public Binance(AlertLayout parent, Coins Coin, Coins Pair)
+        private Binance()
         {
-            this.parent = parent;
-            this.Coin = Coin;
-            this.Pair = Pair;
+            setPairDict();
 
             foreach (CandleWidth k in Enum.GetValues(typeof(CandleWidth)))
             {
                 stopAsyncToken.Add(k, null);
                 dictCandle.Add(k, new List<CandleBinance>());
             }
-
-
         }
 
-        public async void CandlePull(CandleWidth width, CancellationToken token)
+        public async void CandlePull(CandleWidth width, Coins Coin, Coins Pair, CancellationToken token)
         {
             await Task.Run(() =>
             {
@@ -167,16 +178,14 @@ namespace Alerts.Logic.ExchangeCode
             }
         }
 
-        public void add(AlertCard card, List<AlertCard> childList)
+        public void add(AlertCard card, Coins Coin, Coins Pair, List<AlertCard> childList)
         {
             if (childList.Count == 0)
             {
                 CancellationTokenSource source = new CancellationTokenSource();
 
                 stopAsyncToken[CandleWidth.INIT] = source;
-                CandlePull(CandleWidth.INIT, source.Token);
-                //candlePulled += parent.Header.initPull;
-                parent.Header.PullData(Exchange, Coin, Pair);
+                CandlePull(CandleWidth.INIT, Coin, Pair, source.Token);
             }
 
             if (childList.Find(x => x.CandleWidth == card.CandleWidth) == null)
@@ -189,7 +198,7 @@ namespace Alerts.Logic.ExchangeCode
 
                     stopAsyncToken[card.CandleWidth] = source;
 
-                    CandlePull(card.CandleWidth, source.Token);
+                    CandlePull(card.CandleWidth, Coin, Pair, source.Token);
                 }
                 else
                 {
@@ -217,7 +226,6 @@ namespace Alerts.Logic.ExchangeCode
 
             if (childList.Count == 0)
             {
-                //candlePulled -= parent.Header.initPull;
                 CancellationTokenSource source;
                 stopAsyncToken.TryGetValue(CandleWidth.INIT, out source);
                 if (source != null)
@@ -246,6 +254,110 @@ namespace Alerts.Logic.ExchangeCode
                 }
             }
             childList.Sort((x, y) => x.CandleWidth.CompareTo(y.CandleWidth));
+        }
+
+        public List<ImageTextItem> GetPairList()
+        {
+            return new List<ImageTextItem>(uiCoinsList.Keys).OrderBy( x => x.coin.ToString()).ToList();
+        }
+
+        public List<ImageTextItem> GetCoinsListFromPair(Coins Pair)
+        {
+            return uiCoinsList.First(x => x.Key.coin == Pair).Value.OrderBy(x => x.coin.ToString()).ToList();
+        }
+
+        private async void setPairDict()
+        {
+            await Task.Run(() =>
+            {
+                RestClient client = new RestClient(ApiUrl);
+                RestRequest request = new RestRequest("/exchangeInfo");
+                IRestResponse response = client.Execute(request);
+
+                System.Diagnostics.Debug.WriteLine("Response: " + response.ErrorMessage + " " + response.StatusCode + " " + response.IsSuccessful);
+
+                try
+                {
+                    JToken jt = JToken.Parse(response.Content).SelectToken("symbols");
+
+                    foreach (JToken token in jt)
+                    {
+                        Coins k; //pair
+                        Coins v = Coins.INIT; //coin
+
+                        if (Enum.TryParse<Coins>(token.SelectToken("quoteAsset").ToString(), out k) == true && Enum.TryParse<Coins>(token.SelectToken("baseAsset").ToString(), out v) == true)
+                        {
+                            if ("456".Equals(token.SelectToken("quoteAsset").ToString()) == false)
+                            {
+                                if (!paringCoinDict.ContainsKey(k)) //pair does not exist
+                                {
+                                    List<Coins> lv = new List<Coins>();
+                                    lv.Add(v);
+
+                                    paringCoinDict.Add(k, lv);
+                                }
+                                else //pair exists
+                                {
+                                    List<Coins> lv;
+                                    paringCoinDict.TryGetValue(k, out lv);
+                                    lv.Add(v);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine("DBG-EXCEPTION!!!!: " + e.Message + " " + e.StackTrace);
+                }
+            });
+
+            foreach (KeyValuePair<Coins, List<Coins>> entry in paringCoinDict) //every pair
+            {
+                ImageTextItem item = new ImageTextItem();
+
+                try
+                {
+                    item.image.Source = new Uri("/UI/Icons/CoinIcons/" + entry.Key + ".svg", UriKind.Relative);
+                    item.text.Content = entry.Key;
+                    item.coin = entry.Key;
+                    uiCoinsList.Add(item, new List<ImageTextItem>());
+                }
+                catch (Exception)
+                {
+                    item.image.Source = new Uri("/UI/Icons/CoinIcons/WhiteCircle.svg", UriKind.Relative);
+                    item.text.Content = entry.Key;
+                    item.coin = entry.Key;
+                    uiCoinsList.Add(item, new List<ImageTextItem>());
+                }
+
+
+                foreach (Coins c in entry.Value) //every coin to this pair
+                {
+                    try
+                    {
+                        ImageTextItem entryCoin = new ImageTextItem();
+                        entryCoin.image.Source = new Uri("/UI/Icons/CoinIcons/" + c + ".svg", UriKind.Relative);
+                        entryCoin.text.Content = c;
+                        entryCoin.coin = c;
+
+                        List<ImageTextItem> list;
+                        uiCoinsList.TryGetValue(item, out list);
+                        list.Add(entryCoin);
+                    }
+                    catch (Exception)
+                    {
+                        ImageTextItem entryCoin = new ImageTextItem();
+                        entryCoin.image.Source = new Uri("/UI/Icons/CoinIcons/WhiteCircle.svg", UriKind.Relative);
+                        entryCoin.text.Content = c;
+                        entryCoin.coin = c;
+
+                        List<ImageTextItem> list;
+                        uiCoinsList.TryGetValue(item, out list);
+                        list.Add(entryCoin);
+                    }
+                }
+            }
         }
 
         protected virtual void OnCandlePull(CandlePullEventArgs e)

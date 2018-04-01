@@ -30,6 +30,7 @@ namespace Alerts.UI
         private Exchanges _exchange;
         private string _symbol;
         private double _price;
+
         public Exchanges Exchange
         {
             get
@@ -98,7 +99,7 @@ namespace Alerts.UI
                         request = new RestRequest("/ticker/24hr?symbol=" + Coin + Pair);
                     }
 
-                    while (true)
+                    while (!source.Token.IsCancellationRequested)
                     {
                         IRestResponse response = client.Execute(request);
                         System.Diagnostics.Debug.WriteLine("Response Ticker: " + response.ErrorMessage + " " + response.StatusCode + " " + response.IsSuccessful + " " + response.StatusDescription + " " + response.ErrorMessage + " " + response.ResponseStatus);

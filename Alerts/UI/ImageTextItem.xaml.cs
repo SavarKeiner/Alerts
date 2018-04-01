@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Alerts.Logic.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace Alerts.UI
     /// </summary>
     public partial class ImageTextItem : UserControl
     {
+        public Coins coin { get; set; }
+
         public ImageTextItem()
         {
             InitializeComponent();
