@@ -228,7 +228,7 @@ namespace Alerts.UI
 
             selectedIndicator = Indicators.PRICE;
             selectedCondition = IndicatorConditions.CROSS;
-            selectedWidth = CandleWidth.m5;
+            selectedWidth = CandleWidth.m1;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)

@@ -83,7 +83,7 @@ namespace Alerts.Logic.ExchangeCode
 
                     while (!token.IsCancellationRequested)
                     {
-                        if (clist.Count == maxLimit)
+                        if (clist.Count <= maxLimit && clist.Count > minLimit)
                         {
                             limit = minLimit;
                             if (_width != CandleWidth.INIT)
@@ -118,12 +118,11 @@ namespace Alerts.Logic.ExchangeCode
 
 
                         List<CandleBinance> list = JsonConvert.DeserializeObject<List<CandleBinance>>(response.Content);
-
-                        if (list.Count == maxLimit || _width == CandleWidth.INIT)
+                        if (_width == CandleWidth.INIT || (list.Count > minLimit && list.Count <= maxLimit))
                         {
                             clist = list;
                         }
-                        else if (list.Count < maxLimit && clist.Count == maxLimit)
+                        else if (list.Count == minLimit && clist.Count <= maxLimit)
                         {
                             CandleBinance clast = clist[clist.Count - 1];
                             CandleBinance last = list[list.Count - 1];
@@ -156,7 +155,6 @@ namespace Alerts.Logic.ExchangeCode
                         OnCandlePull(args);
 
 
-                        newList = false;
                         Thread.Sleep(sleepTime);
                     }
                 } catch (Exception e)

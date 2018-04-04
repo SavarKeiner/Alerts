@@ -28,6 +28,8 @@ namespace Alerts
         {
             switch (width)
             {
+                case CandleWidth.m1:
+                    return "1m";
                 case CandleWidth.m5:
                     return "5m";
                 case CandleWidth.m15:
@@ -55,6 +57,8 @@ namespace Alerts
         {
             switch (width)
             {
+                case "1m":
+                    return CandleWidth.m1;
                 case "5m":
                     return CandleWidth.m5;
                 case "15m":

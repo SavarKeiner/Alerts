@@ -46,7 +46,7 @@
             <Label x:Name="indicatorChange" Content="0.00000000" FontSize="14" Foreground="White" FontFamily="Courier" FontWeight="SemiBold"></Label>
         </StackPanel>
 
-            <Button x:Name="btnRemoveCard" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Width="20" Height="20" Grid.Column="12" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="Button_Click">
+            <Button x:Name="btnRemoveCard" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Width="20" Height="20" Grid.Column="12" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <ContentPresenter Content="{TemplateBinding Content}"/>
