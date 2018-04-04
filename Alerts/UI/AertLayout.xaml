@@ -19,7 +19,7 @@
             </Grid.RowDefinitions>
 
 
-            <control:CellCoinHeader x:Name="Header" Grid.Row="0"></control:CellCoinHeader>
+            <control:CoinHeader x:Name="Header" Grid.Row="0"></control:CoinHeader>
             <Canvas x:Name="CardGrid" Grid.Row="1"></Canvas>
         </Grid>
     </Border>

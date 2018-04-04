@@ -25,7 +25,7 @@ namespace Alerts.UI
     /// <summary>
     /// Interaction logic for CellCoinHeader.xaml
     /// </summary>
-    public partial class CellCoinHeader : UserControl
+    public partial class CoinHeader : UserControl
     {
         private Exchanges _exchange;
         private string _symbol;
@@ -76,7 +76,7 @@ namespace Alerts.UI
 
         public CancellationTokenSource source;
 
-        public CellCoinHeader()
+        public CoinHeader()
         {
             InitializeComponent();
             source = new CancellationTokenSource();

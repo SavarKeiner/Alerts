@@ -153,8 +153,8 @@
     <Compile Include="UI\CellCondition.xaml.cs">
       <DependentUpon>CellCondition.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\CellCoinHeader.xaml.cs">
-      <DependentUpon>CellCoinHeader.xaml</DependentUpon>
+    <Compile Include="UI\CoinHeader.xaml.cs">
+      <DependentUpon>CoinHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\CellGridAddPopup.xaml.cs">
       <DependentUpon>CellGridAddPopup.xaml</DependentUpon>
@@ -214,7 +214,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\CellCoinHeader.xaml">
+    <Page Include="UI\CoinHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
