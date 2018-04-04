@@ -231,36 +231,34 @@ namespace Alerts.UI
         private void calculateDx(CandlePullEventArgs e)
         {
             List<CandleIF> list = e.candleList;
-            ChartValues<LineChartModel> model;
+            ChartValues<LineChartModel> model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
             int a;
             int b = 0;
             double[] c = new double[e.candleList.Count];
             int optInTimePeriod = 14;
+            int pointsToDraw = App.Clamp(list.Count - optInTimePeriod, 0, maxPoints); //if there are less points to draw then set in maxPoints
 
-            model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
+            if (list.Count <= optInTimePeriod) //check if indicator can even be calculated, coin has less candles than required for optInTimePeriod
+            {
+                Value = 0.0d;
+                ValueChange = 0.0d;
+                return;
+            }
 
-            TicTacTec.TA.Library.Core.Dx(0, 200 - 1, e.candleList.Select(x => x.getHigh()).ToArray(), e.candleList.Select(x => x.getLow()).ToArray(), e.candleList.Select(x => x.getClose()).ToArray(), optInTimePeriod, out a, out b, c);
+            TicTacTec.TA.Library.Core.Dx(0, list.Count - 1, list.Select(x => x.getHigh()).ToArray(), list.Select(x => x.getLow()).ToArray(), list.Select(x => x.getClose()).ToArray(), optInTimePeriod, out a, out b, c);
 
-            if (e.newList == true)
+            if (model.Count == 0 || e.newList == true) //first run or pulling skipped candles
             {
                 model.Clear();
-                for (int i = 0; i < maxPoints; i++)
+                for (int i = 0; i < pointsToDraw; i++)
                 {
-                    model.Add(new LineChartModel { DateTime = e.candleList[200 - maxPoints + i].getOpenTime(), Value = c[b - maxPoints + i] });
+                    model.Add(new LineChartModel { DateTime = list[list.Count - pointsToDraw + i].getOpenTime(), Value = c[b - pointsToDraw + i] });
                 }
             }
-
-            if (model.Count == 0)
-            {
-                for (int i = 0; i < maxPoints; i++)
-                {
-                    model.Add(new LineChartModel { DateTime = e.candleList[200 - maxPoints + i].getOpenTime(), Value = c[b - maxPoints + i] });
-                }
-            }
-            else if (model.Count == maxPoints)
+            else if (model.Count == pointsToDraw)
             {
                 LineChartModel clast = model[model.Count - 1];
-                CandleIF last = e.candleList[e.candleList.Count - 1];
+                CandleIF last = list[list.Count - 1];
 
                 if (last.getOpenTime() == clast.DateTime)
                 {
@@ -270,54 +268,51 @@ namespace Alerts.UI
                 {
                     model.RemoveAt(0);
                     model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = c[b - 1] });
-
                 }
-
-                /*foreach (LineChartModel m in model)
-                {
-                    System.Diagnostics.Debug.WriteLine("rs: " + m.Value + " " + m.DateTime);
-                }*/
+            }
+            else if (model.Count < pointsToDraw)
+            {
+                CandleIF last = list[list.Count - 1];
+                model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = c[b - 1] });
             }
 
             Value = c[b - 1];
             ValueChange = (c[b - 1] - c[b - 2]);
 
-            calcConditions(c[b - 2], c[b - 1], e.candleList[e.candleList.Count - 1].getOpenTime());
+            calcConditions(c[b - 2], c[b - 1], list[list.Count - 1].getOpenTime());
         }
 
         private void calculateAdx(CandlePullEventArgs e)
         {
             List<CandleIF> list = e.candleList;
-            ChartValues<LineChartModel> model;
+            ChartValues<LineChartModel> model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
             int a;
             int b = 0;
             double[] c = new double[e.candleList.Count];
             int optInTimePeriod = 14;
+            int pointsToDraw = App.Clamp(list.Count - optInTimePeriod, 0, maxPoints); //if there are less points to draw then set in maxPoints
 
-            model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
+            if (list.Count <= optInTimePeriod) //check if indicator can even be calculated, coin has less candles than required for optInTimePeriod
+            {
+                Value = 0.0d;
+                ValueChange = 0.0d;
+                return;
+            }
 
-            TicTacTec.TA.Library.Core.Adx(0, 200 - 1, e.candleList.Select(x => x.getHigh()).ToArray(), e.candleList.Select(x => x.getLow()).ToArray(), e.candleList.Select(x => x.getClose()).ToArray(), optInTimePeriod, out a, out b, c);
+            TicTacTec.TA.Library.Core.Adx(0, list.Count - 1, list.Select(x => x.getHigh()).ToArray(), list.Select(x => x.getLow()).ToArray(), list.Select(x => x.getClose()).ToArray(), optInTimePeriod, out a, out b, c);
 
-            if (e.newList == true)
+            if (model.Count == 0 || e.newList == true) //first run or pulling skipped candles
             {
                 model.Clear();
-                for (int i = 0; i < maxPoints; i++)
+                for (int i = 0; i < pointsToDraw; i++)
                 {
-                    model.Add(new LineChartModel { DateTime = e.candleList[200 - maxPoints + i].getOpenTime(), Value = c[b - maxPoints + i] });
+                    model.Add(new LineChartModel { DateTime = list[list.Count - pointsToDraw + i].getOpenTime(), Value = c[b - pointsToDraw + i] });
                 }
             }
-
-            if (model.Count == 0)
-            {
-                for (int i = 0; i < maxPoints; i++)
-                {
-                    model.Add(new LineChartModel { DateTime = e.candleList[200 - maxPoints + i].getOpenTime(), Value = c[b - maxPoints + i] });
-                }
-            }
-            else if (model.Count == maxPoints)
+            else if (model.Count == pointsToDraw)
             {
                 LineChartModel clast = model[model.Count - 1];
-                CandleIF last = e.candleList[e.candleList.Count - 1];
+                CandleIF last = list[list.Count - 1];
 
                 if (last.getOpenTime() == clast.DateTime)
                 {
@@ -329,52 +324,50 @@ namespace Alerts.UI
                     model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = c[b - 1] });
 
                 }
-
-                /*foreach (LineChartModel m in model)
-                {
-                    System.Diagnostics.Debug.WriteLine("rs: " + m.Value + " " + m.DateTime);
-                }*/
+            }
+            else if (model.Count < pointsToDraw)
+            {
+                CandleIF last = list[list.Count - 1];
+                model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = c[b - 1] });
             }
 
             Value = c[b - 1];
             ValueChange = (c[b - 1] - c[b - 2]);
 
-            calcConditions(c[b - 2], c[b - 1], e.candleList[e.candleList.Count - 1].getOpenTime());
+            calcConditions(c[b - 2], c[b - 1], list[list.Count - 1].getOpenTime());
         }
 
         private void calculateCci(CandlePullEventArgs e)
         {
             List<CandleIF> list = e.candleList;
-            ChartValues<LineChartModel> model;
+            ChartValues<LineChartModel> model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
             int a;
             int b = 0;
             double[] c = new double[e.candleList.Count];
             int optInTimePeriod = 14;
+            int pointsToDraw = App.Clamp(list.Count - optInTimePeriod, 0, maxPoints); //if there are less points to draw then set in maxPoints
 
-            model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
+            if (list.Count <= optInTimePeriod) //check if indicator can even be calculated, coin has less candles than required for optInTimePeriod
+            {
+                Value = 0.0d;
+                ValueChange = 0.0d;
+                return;
+            }
 
-            TicTacTec.TA.Library.Core.Cci(0, 200 - 1, e.candleList.Select(x => x.getHigh()).ToArray(), e.candleList.Select(x => x.getLow()).ToArray(), e.candleList.Select(x => x.getClose()).ToArray(), optInTimePeriod, out a, out b, c);
+            TicTacTec.TA.Library.Core.Cci(0, list.Count - 1, list.Select(x => x.getHigh()).ToArray(), list.Select(x => x.getLow()).ToArray(), list.Select(x => x.getClose()).ToArray(), optInTimePeriod, out a, out b, c);
 
-            if (e.newList == true)
+            if (model.Count == 0 || e.newList == true) //first run or pulling skipped candles
             {
                 model.Clear();
-                for (int i = 0; i < maxPoints; i++)
+                for (int i = 0; i < pointsToDraw; i++)
                 {
-                    model.Add(new LineChartModel { DateTime = e.candleList[200 - maxPoints + i].getOpenTime(), Value = c[b - maxPoints + i] });
+                    model.Add(new LineChartModel { DateTime = list[list.Count - pointsToDraw + i].getOpenTime(), Value = c[b - pointsToDraw + i] });
                 }
             }
-
-            if (model.Count == 0)
-            {
-                for (int i = 0; i < maxPoints; i++)
-                {
-                    model.Add(new LineChartModel { DateTime = e.candleList[200 - maxPoints + i].getOpenTime(), Value = c[b - maxPoints + i] });
-                }
-            }
-            else if (model.Count == maxPoints)
+            else if (model.Count == pointsToDraw)
             {
                 LineChartModel clast = model[model.Count - 1];
-                CandleIF last = e.candleList[e.candleList.Count - 1];
+                CandleIF last = list[list.Count - 1];
 
                 if (last.getOpenTime() == clast.DateTime)
                 {
@@ -386,51 +379,43 @@ namespace Alerts.UI
                     model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = c[b - 1] });
 
                 }
-
-                /*foreach (LineChartModel m in model)
-                {
-                    System.Diagnostics.Debug.WriteLine("rs: " + m.Value + " " + m.DateTime);
-                }*/
+            }
+            else if (model.Count < pointsToDraw)
+            {
+                CandleIF last = list[list.Count - 1];
+                model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = c[b - 1] });
             }
 
             Value = c[b - 1];
             ValueChange = (c[b - 1] - c[b - 2]);
 
-            calcConditions(c[b - 2], c[b - 1], e.candleList[e.candleList.Count - 1].getOpenTime());
+            calcConditions(c[b - 2], c[b - 1], list[list.Count - 1].getOpenTime());
         }
 
         private void calculateObv(CandlePullEventArgs e)
         {
             List<CandleIF> list = e.candleList;
-            ChartValues<LineChartModel> model;
+            ChartValues<LineChartModel> model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
             int a;
             int b = 0;
             double[] c = new double[e.candleList.Count];
+            int pointsToDraw = App.Clamp(list.Count, 0, maxPoints); //if there are less points to draw then set in maxPoints
 
-            model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
+            TicTacTec.TA.Library.Core.Obv(0, list.Count - 1, list.Select(x => x.getClose()).ToArray(), list.Select(x => x.getVolume()).ToArray(), out a, out b, c);
 
-            TicTacTec.TA.Library.Core.Obv(0, 200 - 1, e.candleList.Select(x => x.getClose()).ToArray(), e.candleList.Select(x => x.getVolume()).ToArray(), out a, out b, c);
 
-            if (e.newList == true)
+            if (model.Count == 0 || e.newList == true) //first run or pulling skipped candles
             {
                 model.Clear();
-                for (int i = 0; i < maxPoints; i++)
+                for (int i = 0; i < pointsToDraw; i++)
                 {
-                    model.Add(new LineChartModel { DateTime = e.candleList[200 - maxPoints + i].getOpenTime(), Value = c[b - maxPoints + i] });
+                    model.Add(new LineChartModel { DateTime = list[list.Count - pointsToDraw + i].getOpenTime(), Value = c[b - pointsToDraw + i] });
                 }
             }
-
-            if (model.Count == 0)
-            {
-                for (int i = 0; i < maxPoints; i++)
-                {
-                    model.Add(new LineChartModel { DateTime = e.candleList[200 - maxPoints + i].getOpenTime(), Value = c[b - maxPoints + i] });
-                }
-            }
-            else if (model.Count == maxPoints)
+            else if (model.Count == pointsToDraw)
             {
                 LineChartModel clast = model[model.Count - 1];
-                CandleIF last = e.candleList[e.candleList.Count - 1];
+                CandleIF last = list[list.Count - 1];
 
                 if (last.getOpenTime() == clast.DateTime)
                 {
@@ -442,50 +427,47 @@ namespace Alerts.UI
                     model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = c[b - 1] });
 
                 }
-
-                /*foreach (LineChartModel m in model)
-                {
-                    System.Diagnostics.Debug.WriteLine("rs: " + m.Value + " " + m.DateTime);
-                }*/
+            }
+            else if (model.Count < pointsToDraw)
+            {
+                CandleIF last = list[list.Count - 1];
+                model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = c[b - 1] });
             }
 
             Value = c[b - 1];
             ValueChange = (c[b - 1] - c[b - 2]);
 
-            calcConditions(c[b - 2], c[b - 1], e.candleList[e.candleList.Count - 1].getOpenTime());
+            calcConditions(c[b - 2], c[b - 1], list[list.Count - 1].getOpenTime());
         }
 
         private void calculateTrix(CandlePullEventArgs e)
         {
             List<CandleIF> list = e.candleList;
-            ChartValues<LineChartModel> model;
+            ChartValues<LineChartModel> model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
             int optInTimePeriod = 18;
             int a;
             int b = 0;
             double[] c = new double[e.candleList.Count];
+            int pointsToDraw = App.Clamp(list.Count - optInTimePeriod, 0, maxPoints); //if there are less points to draw then set in maxPoints
 
-            model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
-            double[] closeArr = list.Select(x => x.getClose()).ToArray();
+            if (list.Count <= optInTimePeriod) //check if indicator can even be calculated, coin has less candles than required for optInTimePeriod
+            {
+                Value = 0.0d;
+                ValueChange = 0.0d;
+                return;
+            }
 
-            TicTacTec.TA.Library.Core.Trix(0, e.candleList.Count - 1, closeArr, optInTimePeriod, out a, out b, c);
+            TicTacTec.TA.Library.Core.Trix(0, e.candleList.Count - 1, list.Select(x => x.getClose()).ToArray(), optInTimePeriod, out a, out b, c);
 
-            if (e.newList == true)
+            if (model.Count == 0 || e.newList == true) //first run or pulling skipped candles
             {
                 model.Clear();
-                for (int i = 0; i < maxPoints; i++)
+                for (int i = 0; i < pointsToDraw; i++)
                 {
-                    model.Add(new LineChartModel { DateTime = e.candleList[200 - maxPoints + i].getOpenTime(), Value = c[b - maxPoints + i] * 100 });
+                    model.Add(new LineChartModel { DateTime = list[list.Count - pointsToDraw + i].getOpenTime(), Value = c[b - pointsToDraw + i] * 100 });
                 }
             }
-
-            if (model.Count == 0)
-            {
-                for (int i = 0; i < maxPoints; i++)
-                {
-                    model.Add(new LineChartModel { DateTime = e.candleList[200 - maxPoints + i].getOpenTime(), Value = c[b - maxPoints + i] * 100 });
-                }
-            }
-            else if (model.Count == maxPoints)
+            else if (model.Count == pointsToDraw)
             {
                 LineChartModel clast = model[model.Count - 1];
                 CandleIF last = e.candleList[e.candleList.Count - 1];
@@ -500,17 +482,17 @@ namespace Alerts.UI
                     model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = c[b - 1] * 100 });
 
                 }
-
-                /*foreach (LineChartModel m in model)
-                {
-                    System.Diagnostics.Debug.WriteLine("rs: " + m.Value + " " + m.DateTime);
-                }*/
+            }
+            else if (model.Count < pointsToDraw)
+            {
+                CandleIF last = list[list.Count - 1];
+                model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = c[b - 1] });
             }
 
             Value = c[b - 1] * 100;
             ValueChange = (c[b - 1] - c[b -2]) * 100;
 
-            calcConditions(c[b - 2] * 100, c[b - 1] * 100, e.candleList[e.candleList.Count - 1].getOpenTime());
+            calcConditions(c[b - 2] * 100, c[b - 1] * 100, list[list.Count - 1].getOpenTime());
         }
 
         private void calculateRsi(CandlePullEventArgs e)
@@ -611,8 +593,8 @@ namespace Alerts.UI
                 model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = list[list.Count - 1].getClose() });
             }
 
-            Value = e.candleList[e.candleList.Count - 1].getClose();
-            ValueChange = e.candleList[e.candleList.Count - 1].getClose() - e.candleList[e.candleList.Count - 2].getClose();
+            Value = list[list.Count - 1].getClose();
+            ValueChange = list[list.Count - 1].getClose() - list[list.Count - 2].getClose();
 
             if (ValueChange >= 0)
                 indicatorChange.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00FF00"));
@@ -625,28 +607,18 @@ namespace Alerts.UI
         private void calculateVolume(CandlePullEventArgs e)
         {
             List<CandleIF> list = e.candleList;
-            ChartValues<LineChartModel> model;
+            ChartValues<LineChartModel> model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
+            int pointsToDraw = App.Clamp(list.Count, 0, maxPoints); //if there are less points to draw then set in maxPoints
 
-            model = (ChartValues<LineChartModel>)((LineSeries)SeriesCollection[0]).Values;
-            double[] volArr = list.Select(x => x.getVolume()).ToArray();
-
-            if (e.newList == true)
+            if (model.Count == 0 || e.newList == true) //first run or pulling skipped candles
             {
                 model.Clear();
-                for (int i = 0; i < maxPoints; i++)
+                for (int i = 0; i < pointsToDraw; i++)
                 {
-                    model.Add(new LineChartModel { DateTime = list[list.Count - 1 - maxPoints + i].getOpenTime(), Value = list[list.Count - 1 - maxPoints + i].getVolume() });
+                    model.Add(new LineChartModel { DateTime = list[list.Count - pointsToDraw + i].getOpenTime(), Value = list[list.Count - pointsToDraw + i].getVolume() });
                 }
             }
-
-            if (model.Count == 0)
-            {
-                for (int i = 0; i < maxPoints; i++)
-                {
-                    model.Add(new LineChartModel { DateTime = list[list.Count - 1 - maxPoints + i].getOpenTime(), Value = list[list.Count - 1 - maxPoints + i].getVolume() });
-                }
-            }
-            else if (model.Count == maxPoints)
+            else if (model.Count == pointsToDraw)
             {
                 LineChartModel clast = model[model.Count - 1];
                 CandleIF last = list[list.Count - 1];
@@ -661,21 +633,22 @@ namespace Alerts.UI
                     model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = last.getVolume() });
 
                 }
-
-                /*foreach (LineChartModel m in model)
-                {
-                    System.Diagnostics.Debug.WriteLine("rs: " + m.Value + " " + m.DateTime);
-                }*/
             }
-            Value = e.candleList[e.candleList.Count - 1].getVolume();
-            ValueChange = e.candleList[e.candleList.Count - 1].getVolume() - e.candleList[e.candleList.Count - 2].getVolume();
+            else if (model.Count < pointsToDraw)
+            {
+                CandleIF last = list[list.Count - 1];
+                model.Add(new LineChartModel { DateTime = last.getOpenTime(), Value = last.getVolume() });
+            }
+
+            Value = list[list.Count - 1].getVolume();
+            ValueChange = list[list.Count - 1].getVolume() - list[list.Count - 2].getVolume();
 
             if (ValueChange >= 0)
                 indicatorChange.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00FF00"));
             else
                 indicatorChange.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF0000"));
 
-            calcConditions(e.candleList[e.candleList.Count - 2].getClose(), e.candleList[e.candleList.Count - 1].getClose(), e.candleList[e.candleList.Count - 1].getOpenTime());
+            calcConditions(list[list.Count - 2].getClose(), list[list.Count - 1].getClose(), list[list.Count - 1].getOpenTime());
         }
 
 
